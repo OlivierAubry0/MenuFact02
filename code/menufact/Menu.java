@@ -10,7 +10,7 @@ public class Menu {
     private int courant;
     private ArrayList<PlatAuMenu> plat = new ArrayList<PlatAuMenu>();
 
-    public Menu(String description) {
+    private Menu(String description) {
         this.description = description;
     }
 
@@ -24,6 +24,10 @@ public class Menu {
         courant = i;
     }
 
+    public static Menu menu;
+    public static Menu getMenu(String description) {
+        return menu = (menu == null) ? new Menu(description) : menu;
+    }
     public PlatAuMenu platCourant()
     {
         return plat.get(courant);

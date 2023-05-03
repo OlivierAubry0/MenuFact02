@@ -28,8 +28,8 @@ public class TestMenuFact02 {
         PlatSante ps5 = new PlatSante(14,"PlatSante4",50,11,11,11);
 
 
-        Menu m1 = new Menu("menufact.Menu 1");
-        Menu m2 = new Menu("menufact.Menu 2");
+        Menu m1 = Menu.getMenu("menufact.Menu 1");
+        Menu m2 = Menu.getMenu("menufact.Menu 2");
 
         Facture f1 = new Facture("Ma facture");
 
@@ -38,7 +38,7 @@ public class TestMenuFact02 {
 
         t.test1_AffichePlatsAuMenu(trace, p1,p2,p3,p4,p5);
         t. test2_AffichePlatsSante(trace, ps1,ps2,ps3,ps4,ps5);
-
+        t.test3_AjoutMenu(trace, m1, m2);
         t.test4_AjoutPlatsAuMenu(trace, m1, p1, p2, ps1, ps2, m2, p3, p4, ps3, ps4);
 
 
