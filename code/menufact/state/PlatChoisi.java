@@ -1,14 +1,16 @@
-package menufact.plats;
+package menufact.state;
 
 import menufact.plats.PlatAuMenu;
 
 public class PlatChoisi {
     private PlatAuMenu plat;
     private int quantite;
+    private StatePreparation state;
 
     public PlatChoisi(PlatAuMenu plat, int quantite) {
         this.plat = plat;
         this.quantite = quantite;
+        this.state = new Commande(this);
     }
 
     @Override
@@ -30,4 +32,6 @@ public class PlatChoisi {
     public PlatAuMenu getPlat() {
         return plat;
     }
+    public StatePreparation getState() { return state; }
+    public void setState(StatePreparation state) { this.state = state; }
 }
