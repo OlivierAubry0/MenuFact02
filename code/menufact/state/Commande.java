@@ -1,6 +1,6 @@
 package menufact.state;
 
-import menufact.plats.PlatChoisi;
+import menufact.factory.plats.PlatChoisi;
 public class Commande extends StatePreparation{
     public Commande(PlatChoisi plat){
         super(plat);

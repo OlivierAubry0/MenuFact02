@@ -1,4 +1,4 @@
-package menufact.plats;
+package menufact.factory.plats;
 
 import menufact.plats.PlatAuMenu;
 import menufact.state.Commande;

@@ -2,7 +2,7 @@ package menufact.state;
 
 public class Servie extends StatePreparation{
 
-    public Servie(menufact.plats.PlatChoisi plat){
+    public Servie(menufact.factory.plats.PlatChoisi plat){
         super(plat);
         this.state = "Servie";
     }

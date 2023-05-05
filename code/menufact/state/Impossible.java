@@ -2,7 +2,7 @@ package menufact.state;
 
 public class Impossible extends StatePreparation{
 
-    public Impossible(menufact.plats.PlatChoisi plat){
+    public Impossible(menufact.factory.plats.PlatChoisi plat){
         super(plat);
         this.state = "Impossible";
 
