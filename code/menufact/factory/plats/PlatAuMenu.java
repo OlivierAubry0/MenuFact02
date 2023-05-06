@@ -1,14 +1,21 @@
-package menufact.plats;
+package menufact.factory.plats;
+
+import menufact.factory.plats.exceptions.PlatException;
 
 public class PlatAuMenu {
     private int code;
     private String description;
     private double prix;
 
-    public PlatAuMenu(int code, String description, double prix) {
+    public PlatAuMenu(int code, String description, double prix) throws PlatException {
         this.code = code;
         this.description = description;
-        this.prix = prix;
+        if(prix >=0) {
+            this.prix = prix;
+        }
+        else{
+            throw new PlatException("number below zero");
+        }
     }
 
     public PlatAuMenu() {

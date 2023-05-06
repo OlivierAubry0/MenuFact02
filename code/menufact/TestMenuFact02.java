@@ -1,17 +1,18 @@
 package menufact;
 
-import menufact.facture.exceptions.FactureException;
+import menufact.factory.plats.exceptions.PlatException;
+import menufact.observer.facture.exceptions.FactureException;
 import menufact.exceptions.MenuException;
 import menufact.observer.facture.Facture;
-import menufact.plats.PlatAuMenu;
+import menufact.factory.plats.PlatAuMenu;
 import menufact.factory.plats.PlatChoisi;
-import menufact.plats.PlatSante;
+import menufact.factory.plats.PlatSante;
 import menufact.singleton.Menu;
 
 
 public class TestMenuFact02 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PlatException, FactureException{
         boolean trace = true;
 
         TestMenuFact02 t = new TestMenuFact02();
@@ -149,7 +150,7 @@ public class TestMenuFact02 {
     }
 
 
-    private void test4_AjoutPlatsAuMenu(boolean trace, menufact.singleton.Menu m1,
+    private void test4_AjoutPlatsAuMenu(boolean trace, Menu m1,
                                         PlatAuMenu p1, PlatAuMenu p2,
                                         PlatSante ps1, PlatSante ps2,
                                         Menu m2,
@@ -249,7 +250,12 @@ public class TestMenuFact02 {
         {
             throw fe;
         }
+        catch (PlatException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println(f1);
+
+
     }
 
 
@@ -258,8 +264,7 @@ public class TestMenuFact02 {
         f1.associerClient(c1);
         System.out.println(f1);
     }
-    private void test8_AjouterPlatsFacture(Facture f1, Menu m1, int pos) throws MenuException,FactureException
-    {
+    private void test8_AjouterPlatsFacture(Facture f1, Menu m1, int pos) throws MenuException, FactureException, PlatException {
         System.out.println("===test8_AjouterPlatsFacture");
 
         try{
@@ -276,14 +281,14 @@ public class TestMenuFact02 {
         {
             f1.ajoutePlat(platChoisi);
         }
-        catch (FactureException fe)
+        catch (FactureException | PlatException fe)
         {
             throw fe;
         }
         System.out.println(f1);
     }
 
-    private void test9_PayerFacture(Facture f1)
+    private void test9_PayerFacture(Facture f1) throws FactureException
     {
         System.out.println("===test9_PayerFacture");
 

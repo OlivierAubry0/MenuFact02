@@ -1,6 +1,5 @@
 package menufact.factory.plats;
 
-import menufact.plats.PlatAuMenu;
 import menufact.state.Commande;
 import menufact.state.StatePreparation;
 

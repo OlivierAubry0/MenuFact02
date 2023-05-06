@@ -1,18 +1,15 @@
 package menufact.observer.facture;
 
+import menufact.Chef;
 import menufact.Client;
-import menufact.facture.exceptions.FactureException;
-import menufact.observer.facture.Facture;
+import menufact.observer.facture.exceptions.FactureException;
 import menufact.factory.plats.PlatChoisi;
+import menufact.factory.plats.exceptions.PlatException;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Une facture du systeme Menufact
- * @author Domingo Palao Munoz
- * @version 1.0
- */
+
 public class Facture {
     private Date date;
     private String description;
@@ -20,6 +17,7 @@ public class Facture {
     private ArrayList<PlatChoisi> platchoisi = new ArrayList<PlatChoisi>();
     private int courant;
     private Client client;
+    private Chef chef;
 
 
     /**********************Constantes ************/
@@ -42,8 +40,8 @@ public class Facture {
     public double sousTotal()
     {
         double soustotal=0;
-         for (PlatChoisi p : platchoisi)
-             soustotal += p.getQuantite() * p.getPlat().getPrix();
+        for (PlatChoisi p : platchoisi)
+            soustotal += p.getQuantite() * p.getPlat().getPrix();
         return soustotal;
     }
 
@@ -74,16 +72,24 @@ public class Facture {
     /**
      * Permet de chager l'état de la facture à PAYEE
      */
-    public void payer()
-    {
-       etat = FactureEtat.PAYEE;
+    public void payer() throws FactureException {
+        //etat = FactureEtat.PAYEE;
+        if (etat.changerEtat(new FactureEtatPayee())) {
+            etat = new FactureEtatPayee();
+        } else {
+            throw new FactureException("La facture ne peut pas etre payee");
+        }
     }
     /**
      * Permet de chager l'état de la facture à FERMEE
      */
-    public void fermer()
-    {
-       etat = FactureEtat.FERMEE;
+    public void fermer() throws FactureException {
+        //etat = FactureEtat.FERMEE;
+        if (etat.changerEtat(new FactureEtatFermee())){
+            etat = new FactureEtatFermee();
+        } else {
+            throw new FactureException("La facture ne peut pas etre fermee");
+        }
     }
 
     /**
@@ -92,10 +98,10 @@ public class Facture {
      */
     public void ouvrir() throws FactureException
     {
-        if (etat == FactureEtat.PAYEE)
-            throw new FactureException("La facture ne peut pas être reouverte.");
+        if (etat.changerEtat(new FactureEtatOuverte()))
+            etat = new FactureEtatOuverte();
         else
-            etat = FactureEtat.OUVERTE;
+            throw new FactureException("La facture ne peut pas être reouverte.");
     }
 
     /**
@@ -113,7 +119,7 @@ public class Facture {
      */
     public Facture(String description) {
         date = new Date();
-        etat = FactureEtat.OUVERTE;
+        etat = new FactureEtatOuverte();
         courant = -1;
         this.description = description;
     }
@@ -123,12 +129,18 @@ public class Facture {
      * @param p un plat choisi
      * @throws FactureException Seulement si la facture est OUVERTE
      */
-    public void ajoutePlat(PlatChoisi p) throws FactureException
-    {
-        if (etat == FactureEtat.OUVERTE)
-            platchoisi.add(p);
-        else
+    public void ajoutePlat(PlatChoisi p) throws FactureException, PlatException {
+        if (etat instanceof FactureEtatFermee || etat instanceof FactureEtatPayee){
             throw new FactureException("On peut ajouter un plat seulement sur une facture OUVERTE.");
+        }
+        if (p == null){
+            throw new PlatException("Le plat choisi ne peut pas etre null.");
+        }
+        if (chef == null){
+            throw new FactureException("Il ne peut pas y avoir aucun chef pour ajouter un plat.");
+        }
+        if (etat instanceof FactureEtatOuverte)
+            platchoisi.add(p);
     }
 
     /**
@@ -158,14 +170,14 @@ public class Facture {
         String lesPlats = new String();
         String factureGenere = new String();
 
-        int i =1;
+        int i = 1;
 
 
         factureGenere =   "Facture generee.\n" +
-                          "Date:" + date + "\n" +
-                          "Description: " + description + "\n" +
-                          "Client:" + client.getNom() + "\n" +
-                          "Les plats commandes:" + "\n" + lesPlats;
+                "Date:" + date + "\n" +
+                "Description: " + description + "\n" +
+                "Client:" + client.getNom() + "\n" +
+                "Les plats commandes:" + "\n" + lesPlats;
 
         factureGenere += "Seq   Plat         Prix   Quantite\n";
         for (PlatChoisi plat : platchoisi)
