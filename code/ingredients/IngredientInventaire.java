@@ -1,12 +1,16 @@
 package ingredients;
 
 import ingredients.exceptions.IngredientException;
+import ingredients.exceptions.IngredientsAuMenu;
+import java.util.Map;
 
 public class IngredientInventaire {
     private IngredientInventaire ingredientInventaire;
+
+    private static IngredientInventaire inventaire;
     private int quantite;
 
-    public IngredientInventaire(IngredientInventaire ingredientInventaire, int quantite) {
+    public IngredientInventaire() {
         this.ingredientInventaire = ingredientInventaire;
         this.quantite = quantite;
     }
@@ -22,4 +26,11 @@ public class IngredientInventaire {
         else
             this.quantite = quantite;
     }
+
+    public static IngredientInventaire getInventaire() {
+        if (inventaire == null)
+            inventaire = new IngredientInventaire();
+        return inventaire;
+    }
+
 }

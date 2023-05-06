@@ -5,6 +5,10 @@ import menufact.Client;
 import menufact.observer.facture.exceptions.FactureException;
 import menufact.factory.plats.PlatChoisi;
 import menufact.factory.plats.exceptions.PlatException;
+import menufact.state.EnCours;
+import menufact.state.Servie;
+import menufact.state.StatePreparation;
+import menufact.state.Terminee;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +36,9 @@ public class Facture {
     {
         this.client = client;
     }
-
+    public void associerChef(Chef chef) {
+        this.chef = chef;
+    }
     /**
      * Calcul du sous total de la facture
      * @return le sous total
@@ -87,6 +93,7 @@ public class Facture {
         //etat = FactureEtat.FERMEE;
         if (etat.changerEtat(new FactureEtatFermee())){
             etat = new FactureEtatFermee();
+
         } else {
             throw new FactureException("La facture ne peut pas etre fermee");
         }
@@ -141,6 +148,7 @@ public class Facture {
         }
         if (etat instanceof FactureEtatOuverte)
             platchoisi.add(p);
+            p.setState(new EnCours(p));
     }
 
     /**
@@ -184,6 +192,7 @@ public class Facture {
         {
             factureGenere +=  i + "     " + plat.getPlat().getDescription() +  "  " + plat.getPlat().getPrix() +  "      " + plat.getQuantite() + "\n";
             i++;
+            plat.setState(new Terminee(plat));
         }
 
         factureGenere += "          TPS:               " + tps() + "\n";

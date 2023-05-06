@@ -1,11 +1,15 @@
 package menufact.factory.plats;
 
 import menufact.factory.plats.exceptions.PlatException;
-
+import ingredients.exceptions.IngredientsAuMenu;
+import java.util.Map;
+import java.util.HashMap;
 public class PlatAuMenu {
     private int code;
     private String description;
     private double prix;
+    private Map<IngredientsAuMenu, Integer> ingredients = new HashMap<>();
+    public Map<IngredientsAuMenu, Integer> getIngredients() { return ingredients; }
 
     public PlatAuMenu(int code, String description, double prix) throws PlatException {
         this.code = code;
@@ -16,6 +20,9 @@ public class PlatAuMenu {
         else{
             throw new PlatException("number below zero");
         }
+    }
+    public void setIngredients(IngredientsAuMenu ingredient, Integer quantity) {
+        this.ingredients.put(ingredient, quantity);
     }
 
     public PlatAuMenu() {

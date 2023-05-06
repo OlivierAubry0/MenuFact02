@@ -240,7 +240,7 @@ public class TestMenuFact02 {
     private void test7_CreerFacture(Facture f1, Menu m1) throws FactureException
     {
         System.out.println("===test7_CreerFacture");
-
+        f1.associerChef(Chef.getInstance("naruto"));
         PlatChoisi platChoisi = new PlatChoisi(m1.platCourant(),5);
         try
         {
