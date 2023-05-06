@@ -1,8 +1,9 @@
-package menufact.facture;
+package menufact.observer.facture;
 
 import menufact.Client;
 import menufact.facture.exceptions.FactureException;
-import menufact.plats.PlatChoisi;
+import menufact.observer.facture.Facture;
+import menufact.factory.plats.PlatChoisi;
 
 import java.util.ArrayList;
 import java.util.Date;

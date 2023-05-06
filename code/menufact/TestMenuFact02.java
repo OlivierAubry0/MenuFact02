@@ -2,10 +2,12 @@ package menufact;
 
 import menufact.facture.exceptions.FactureException;
 import menufact.exceptions.MenuException;
-import menufact.facture.Facture;
+import menufact.observer.facture.Facture;
 import menufact.plats.PlatAuMenu;
-import menufact.plats.PlatChoisi;
+import menufact.factory.plats.PlatChoisi;
 import menufact.plats.PlatSante;
+import menufact.singleton.Menu;
+
 
 public class TestMenuFact02 {
 
@@ -28,8 +30,8 @@ public class TestMenuFact02 {
         PlatSante ps5 = new PlatSante(14,"PlatSante4",50,11,11,11);
 
 
-        Menu m1 = Menu.getMenu("menufact.Menu 1");
-        Menu m2 = Menu.getMenu("menufact.Menu 2");
+        menufact.singleton.Menu m1 = Menu.getMenu("menufact.Menu 1");
+        menufact.singleton.Menu m2 = Menu.getMenu("menufact.Menu 2");
 
         Facture f1 = new Facture("Ma facture");
 
@@ -147,7 +149,7 @@ public class TestMenuFact02 {
     }
 
 
-    private void test4_AjoutPlatsAuMenu(boolean trace, Menu m1,
+    private void test4_AjoutPlatsAuMenu(boolean trace, menufact.singleton.Menu m1,
                                         PlatAuMenu p1, PlatAuMenu p2,
                                         PlatSante ps1, PlatSante ps2,
                                         Menu m2,
