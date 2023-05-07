@@ -1,14 +1,11 @@
 package menufact;
-import ingredients.exceptions.IngredientsAuMenu;
 import menufact.factory.plats.PlatChoisi;
 import menufact.state.EnCours;
 import menufact.state.Servie;
 import menufact.state.StatePreparation;
-import java.util.Map;
+
 import java.util.Queue;
 import java.util.LinkedList;
-import ingredients.IngredientInventaire;
-import menufact.state.Terminee;
 
 public class Chef {
     private String nom;

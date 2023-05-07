@@ -1,9 +1,13 @@
 package ingredients;
 
+import ingredients.etat.IngredientEtat;
+
 public class Ingredient {
     private String nom;
     private String description;
     private TypeIngredient typeIngredient;
+
+    protected IngredientEtat etat;
 
     public String getNom() {
         return nom;
