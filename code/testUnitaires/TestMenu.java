@@ -1,14 +1,37 @@
+
 package testUnitaires;
 
-import menufact.singleton.Menu;
-import menufact.exceptions.MenuException;
-import menufact.factory.plats.PlatAuMenu;;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import menufact.Chef;
+
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+//Client
 
 class MenuTest {
 
+    @Test
+    void ajoute() {
     }
+
+    @Test
+    void position() {
+    }
+
+    @Test
+    void platCourant() {
+    }
+
+    @Test
+    void positionSuivante() {
+    }
+
+    @Test
+    void positionPrecedente() {
+    }
+
+    @Test
+    void testToString() {
+
+    }
+
+}
