@@ -1,10 +1,12 @@
 package menufact.state;
 
+import menufact.factory.plats.PlatChoisi;
+
 public abstract class StatePreparation {
-    protected menufact.factory.plats.PlatChoisi plat;
+    protected PlatChoisi plat;
     protected String state;
 
-    public StatePreparation(menufact.factory.plats.PlatChoisi plat){
+    public StatePreparation(PlatChoisi plat){
         this.plat = plat;
     }
 

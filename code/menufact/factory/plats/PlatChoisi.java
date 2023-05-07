@@ -1,9 +1,12 @@
 package menufact.factory.plats;
 
+import menufact.factory.exceptions.PlatException;
+import menufact.factory.plats.Plat;
+import menufact.factory.plats.PlatAuMenu;
 import menufact.state.Commande;
 import menufact.state.StatePreparation;
 
-public class PlatChoisi {
+public class PlatChoisi extends Plat {
     private PlatAuMenu plat;
     private int quantite;
     private StatePreparation state;
@@ -12,14 +15,6 @@ public class PlatChoisi {
         this.plat = plat;
         this.quantite = quantite;
         this.state = new Commande(this);
-    }
-
-    @Override
-    public String toString() {
-        return "menufact.plats.PlatChoisi{" +
-                "quantite=" + quantite +
-                ", plat=" + plat +
-                '}';
     }
 
     public int getQuantite() {
@@ -33,6 +28,25 @@ public class PlatChoisi {
     public PlatAuMenu getPlat() {
         return plat;
     }
-    public StatePreparation getState() { return state; }
-    public void setState(StatePreparation state) { this.state = state; }
+
+    public StatePreparation getState() {
+        return state;
+    }
+
+    public void setState(StatePreparation state) {
+        this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "menufact.plats.PlatChoisi{" +
+                "quantite=" + quantite +
+                ", plat=" + plat +
+                '}';
+    }
+
+    @Override
+    public void AfficherPlat() {
+        System.out.println("Plat choisi");
+    }
 }

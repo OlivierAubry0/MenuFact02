@@ -1,6 +1,6 @@
 package menufact;
 
-import menufact.factory.plats.exceptions.PlatException;
+import menufact.factory.exceptions.PlatException;
 import menufact.observer.facture.exceptions.FactureException;
 import menufact.exceptions.MenuException;
 import menufact.observer.facture.Facture;

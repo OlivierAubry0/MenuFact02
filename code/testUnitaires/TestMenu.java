@@ -31,7 +31,6 @@ class MenuTest {
 
     @Test
     void testToString() {
-
     }
 
 }

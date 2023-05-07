@@ -1,4 +1,4 @@
-package menufact.factory.plats.exceptions;
+package menufact.factory.exceptions;
 
 public class PlatException extends Exception{
     public PlatException(String message){

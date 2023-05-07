@@ -4,7 +4,7 @@ import menufact.Chef;
 import menufact.Client;
 import menufact.factory.plats.PlatAuMenu;
 import menufact.factory.plats.PlatChoisi;
-import menufact.factory.plats.exceptions.PlatException;
+import menufact.factory.exceptions.PlatException;
 import menufact.observer.facture.Facture;
 import menufact.observer.facture.exceptions.FactureException;
 import menufact.state.*;

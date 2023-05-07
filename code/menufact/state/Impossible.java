@@ -1,8 +1,10 @@
 package menufact.state;
 
+import menufact.factory.plats.PlatChoisi;
+
 public class Impossible extends StatePreparation{
 
-    public Impossible(menufact.factory.plats.PlatChoisi plat){
+    public Impossible(PlatChoisi plat){
         super(plat);
         this.state = "Impossible";
 

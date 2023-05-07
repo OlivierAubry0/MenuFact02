@@ -1,8 +1,10 @@
 package menufact.state;
 
+import menufact.factory.plats.PlatChoisi;
+
 public class Terminee extends StatePreparation{
 
-    public Terminee(menufact.factory.plats.PlatChoisi plat){
+    public Terminee(PlatChoisi plat){
         super(plat);
         this.state = "Terminee";
 

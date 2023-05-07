@@ -4,10 +4,8 @@ import menufact.Chef;
 import menufact.Client;
 import menufact.observer.facture.exceptions.FactureException;
 import menufact.factory.plats.PlatChoisi;
-import menufact.factory.plats.exceptions.PlatException;
+import menufact.factory.exceptions.PlatException;
 import menufact.state.EnCours;
-import menufact.state.Servie;
-import menufact.state.StatePreparation;
 import menufact.state.Terminee;
 
 import java.util.ArrayList;

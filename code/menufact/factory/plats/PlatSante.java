@@ -1,7 +1,7 @@
 package menufact.factory.plats;
 
+import menufact.factory.exceptions.PlatException;
 import menufact.factory.plats.PlatAuMenu;
-import menufact.factory.plats.exceptions.PlatException;
 
 public class PlatSante extends PlatAuMenu {
     private double kcal;
@@ -37,5 +37,10 @@ public class PlatSante extends PlatAuMenu {
 
     public double getGras() {
         return gras;
+    }
+
+    @Override
+    public void AfficherPlat() {
+        System.out.println("Plat sante");
     }
 }

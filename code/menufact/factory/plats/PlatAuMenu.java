@@ -1,10 +1,12 @@
 package menufact.factory.plats;
 
-import menufact.factory.plats.exceptions.PlatException;
+import menufact.factory.exceptions.PlatException;
 import ingredients.exceptions.IngredientsAuMenu;
+import menufact.factory.plats.Plat;
+
 import java.util.Map;
 import java.util.HashMap;
-public class PlatAuMenu {
+public class PlatAuMenu extends Plat {
     private int code;
     private String description;
     private double prix;
@@ -59,5 +61,10 @@ public class PlatAuMenu {
 
     public void setPrix(double prix) {
         this.prix = prix;
+    }
+
+    @Override
+    public void AfficherPlat() {
+        System.out.println("Plat au menu");
     }
 }

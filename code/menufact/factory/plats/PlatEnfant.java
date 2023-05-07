@@ -1,8 +1,9 @@
 package menufact.factory.plats;
 
-import menufact.factory.plats.exceptions.PlatException;
+import menufact.factory.exceptions.PlatException;
+import menufact.factory.plats.PlatAuMenu;
 
-public class PlatEnfant extends PlatAuMenu{
+public class PlatEnfant extends PlatAuMenu {
     private double proportion;
 
     public PlatEnfant() {
@@ -22,5 +23,10 @@ public class PlatEnfant extends PlatAuMenu{
         return "PlatEnfant{" +
                 "proportion=" + proportion +
                 "} " + super.toString();
+    }
+
+    @Override
+    public void AfficherPlat() {
+        System.out.println("Plat enfant");
     }
 }

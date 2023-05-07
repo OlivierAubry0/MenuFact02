@@ -1,6 +1,6 @@
 package menufact.factory.plats;
 
-public interface Plat {
-    /*factory design pattern*/
-    Plat createPlat();
+public abstract class Plat {
+    public abstract void AfficherPlat();
 }
+
