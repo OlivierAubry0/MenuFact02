@@ -1,54 +1,50 @@
 package menufact;
 
-import menufact.Client;
-import menufact.Chef;
-import menufact.factory.plats.PlatChoisi;
-import menufact.factory.plats.PlatAuMenu;
-import menufact.observer.Facture;
-import menufact.state.EnCours;
-import menufact.state.Terminee;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+public class Client {
+    private int idClient;
+    private String nom;
+    private String numeroCarteCredit;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class ObserverTest {
-    private Chef chef;
-    private Facture facture;
-    private Client client;
-    private PlatAuMenu platAuMenu;
-    private PlatChoisi platChoisi;
-
-    @BeforeEach
-    void setUp() {
-        chef = Chef.getInstance("Chef John");
-        client = new Client(1, "John Doe", "1234-5678-9012-3456");
-        facture = new Facture("Test Facture");
-        platAuMenu = new PlatAuMenu(0, "Test Plat", 15.0);
-        platChoisi = new PlatChoisi(platAuMenu, 1);
-        facture.associerChef(chef);
-        facture.associerClient(client);
+    public Client(int idClient, String nom, String numeroCarteCredit) {
+        this.idClient = idClient;
+        this.nom = nom;
+        this.numeroCarteCredit = numeroCarteCredit;
     }
 
-    @Test
-    void chefShouldReceiveNotification() {
-        // Add the Chef as an observer to the Facture
-        facture.addObserver(chef);
+    public int getIdClient() {
+        return idClient;
+    }
 
-        // Add a PlatChoisi to the Facture
-        try {
-            facture.ajoutePlat(platChoisi);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
+    }
 
-        // Check if the Chef's state has been updated
-        assertEquals(EnCours.class, platChoisi.getState().getClass());
+    public String getNom() {
+        return nom;
+    }
 
-        // Generate the Facture
-        facture.genererFacture();
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-        // Check if the Chef's state has been updated after generating the Facture
-        assertEquals(Terminee.class, platChoisi.getState().getClass());
+    public String getNumeroCarteCredit() {
+        return numeroCarteCredit;
+    }
+
+    public void setNumeroCarteCredit(String numeroCarteCredit) {
+        this.numeroCarteCredit = numeroCarteCredit;
+    }
+
+    @Override
+    public String toString() {
+        return "menufact.Client{" +
+                "idClient=" + idClient +
+                ", nom='" + nom + '\'' +
+                ", numeroCarteCredit='" + numeroCarteCredit + '\'' +
+                '}';
     }
 }
+/*
+@startuml
+class menufact.Client{}
+* */
