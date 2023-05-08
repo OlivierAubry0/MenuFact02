@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class testStatePreparation {
+class TestStatePreparation {
     private Commande commande;
     private Servie servie;
     private Terminee terminee;

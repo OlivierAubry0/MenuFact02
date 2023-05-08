@@ -8,7 +8,7 @@ import menufact.factory.exceptions.PlatException;
 import ingredients.IngredientsAuMenu;
 import java.util.Map;
 import java.util.HashMap;
-public class PlatAuMenu extends Plat {
+public class PlatAuMenu implements Plat{
     private int code;
     private String description;
     private double prix;

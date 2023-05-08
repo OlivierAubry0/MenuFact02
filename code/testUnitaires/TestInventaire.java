@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class IngredientInventaireTest {
+class TestInventaire {
 
     private Inventaire inventaire;
     private Map<Ingredient,Integer> ingredient = new HashMap<>();
