@@ -1,2 +1,4 @@
-package menufact.factory.plats;public class FactoryPlatEnfant {
+package menufact.factory.plats;
+
+public class FactoryPlatEnfant {
 }
