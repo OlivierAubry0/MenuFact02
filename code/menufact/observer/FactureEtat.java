@@ -1,4 +1,4 @@
-package menufact.observer.facture;
+package menufact.observer;
 
 public interface FactureEtat {
     public boolean changerEtat(FactureEtat etat);

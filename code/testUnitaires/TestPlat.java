@@ -1,3 +1,5 @@
+package testUnitaires;
+
 import menufact.factory.plats.*;
 import menufact.factory.exceptions.PlatException;
 import org.junit.jupiter.api.BeforeEach;

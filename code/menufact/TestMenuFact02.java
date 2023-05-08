@@ -1,9 +1,9 @@
 package menufact;
 
 import menufact.factory.exceptions.PlatException;
-import menufact.observer.facture.exceptions.FactureException;
+import menufact.observer.exceptions.FactureException;
 import menufact.exceptions.MenuException;
-import menufact.observer.facture.Facture;
+import menufact.observer.Facture;
 import menufact.factory.plats.PlatAuMenu;
 import menufact.factory.plats.PlatChoisi;
 import menufact.factory.plats.PlatSante;

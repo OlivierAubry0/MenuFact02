@@ -1,4 +1,4 @@
-package menufact.observer.facture;
+package menufact.observer;
 
 public class FactureEtatFermee implements FactureEtat {
     @Override

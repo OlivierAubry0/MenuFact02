@@ -1,4 +1,4 @@
-package menufact;
+package testUnitaires;
 
 import menufact.Client;
 import menufact.Chef;
@@ -22,7 +22,7 @@ class ObserverTest {
     @BeforeEach
     void setUp() {
         chef = Chef.getInstance("Chef John");
-        client = new Client(1, "John Doe", "1234-5678-9012-3456");
+        client = new Client("John Doe");
         facture = new Facture("Test Facture");
         platAuMenu = new PlatAuMenu(0, "Test Plat", 15.0);
         platChoisi = new PlatChoisi(platAuMenu, 1);
@@ -52,3 +52,4 @@ class ObserverTest {
         assertEquals(Terminee.class, platChoisi.getState().getClass());
     }
 }
+

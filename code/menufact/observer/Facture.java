@@ -1,8 +1,10 @@
-package menufact.observer.facture;
+package menufact.observer;
 
+import java.util.List;
+import java.util.ArrayList;
 import menufact.Chef;
 import menufact.Client;
-import menufact.observer.facture.exceptions.FactureException;
+import menufact.observer.exceptions.FactureException;
 import menufact.factory.plats.PlatChoisi;
 import menufact.factory.exceptions.PlatException;
 import menufact.state.EnCours;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class Facture {
+public class Facture implements Sujet {
     private Date date;
     private String description;
     private FactureEtat etat;
@@ -20,7 +22,8 @@ public class Facture {
     private int courant;
     private Client client;
     private Chef chef;
-
+    private FactureEtat factureEtat;
+    private List<Observer> observers = new ArrayList<>();
 
     /**********************Constantes ************/
     private final double TPS = 0.05;
@@ -198,5 +201,22 @@ public class Facture {
         factureGenere += "          Le total est de:   " + total() + "\n";
 
         return factureGenere;
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(String message) {
+        for (Observer observer : observers) {
+            observer.actualiser(message);
+        }
     }
 }

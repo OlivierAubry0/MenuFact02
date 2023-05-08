@@ -3,11 +3,12 @@ import menufact.factory.plats.PlatChoisi;
 import menufact.state.EnCours;
 import menufact.state.Servie;
 import menufact.state.StatePreparation;
+import menufact.observer.Observer;
 
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class Chef {
+public class Chef implements Observer {
     private String nom;
 
     private StatePreparation state;
@@ -48,4 +49,8 @@ public class Chef {
     }
     @Override
     public String toString(){return "Chef: {" + "Nom: " + nom + "}";};
+    @Override
+    public void actualiser(String message) {
+        System.out.println("Chef " + nom + " a reçu une notification: " + message);
+    }
 }
