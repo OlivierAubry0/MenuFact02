@@ -1,14 +1,11 @@
 package menufact.factory.plats;
 
-<<<<<<< HEAD
 import menufact.factory.exceptions.PlatException;
-import ingredients.exceptions.IngredientsAuMenu;
+import ingredients.IngredientsAuMenu;
 import menufact.factory.plats.Plat;
 
-=======
-import menufact.factory.plats.exceptions.PlatException;
+import menufact.factory.exceptions.PlatException;
 import ingredients.IngredientsAuMenu;
->>>>>>> oli-MenuFact02
 import java.util.Map;
 import java.util.HashMap;
 public class PlatAuMenu extends Plat {

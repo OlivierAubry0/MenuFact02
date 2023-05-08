@@ -2,6 +2,7 @@ package testUnitaires;
 
 import menufact.Client;
 import menufact.Chef;
+import menufact.factory.exceptions.PlatException;
 import menufact.factory.plats.PlatChoisi;
 import menufact.factory.plats.PlatAuMenu;
 import menufact.observer.Facture;
@@ -16,40 +17,38 @@ class ObserverTest {
     private Chef chef;
     private Facture facture;
     private Client client;
-    private PlatAuMenu platAuMenu;
-    private PlatChoisi platChoisi;
+    private PlatChoisi plat;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws PlatException{
         chef = Chef.getInstance("Chef John");
-        client = new Client("John Doe");
+        client = new Client(1,"John Doe","123456789");
         facture = new Facture("Test Facture");
-        platAuMenu = new PlatAuMenu(0, "Test Plat", 15.0);
-        platChoisi = new PlatChoisi(platAuMenu, 1);
+        plat = new PlatChoisi(new PlatAuMenu(0, "Test Plat", 15.0), 2);
         facture.associerChef(chef);
         facture.associerClient(client);
     }
 
     @Test
-    void chefShouldReceiveNotification() {
+    void chefShouldReceiveNotification() throws PlatException{
         // Add the Chef as an observer to the Facture
         facture.addObserver(chef);
 
         // Add a PlatChoisi to the Facture
         try {
-            facture.ajoutePlat(platChoisi);
+            facture.ajoutePlat(plat);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // Check if the Chef's state has been updated
-        assertEquals(EnCours.class, platChoisi.getState().getClass());
+        assertEquals(EnCours.class, plat.getState().getClass());
 
         // Generate the Facture
         facture.genererFacture();
 
         // Check if the Chef's state has been updated after generating the Facture
-        assertEquals(Terminee.class, platChoisi.getState().getClass());
+        assertEquals(Terminee.class, plat.getState().getClass());
     }
 }
 

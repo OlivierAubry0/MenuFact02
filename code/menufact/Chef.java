@@ -1,9 +1,11 @@
 package menufact;
+import ingredients.Ingredient;
 import menufact.factory.plats.PlatChoisi;
 import menufact.state.EnCours;
 import menufact.state.Servie;
 import menufact.state.StatePreparation;
 import menufact.observer.Observer;
+import inventaire.Inventaire;
 
 import java.util.Queue;
 import java.util.LinkedList;
@@ -15,6 +17,7 @@ public class Chef implements Observer {
     private Queue<PlatChoisi> platsChoisis = new LinkedList<>();
     private static Chef instance = null;
     private Chef(String nom){this.nom = nom;}
+
     public static Chef getInstance(String nom){
         if (instance == null){
             instance = new Chef(nom);

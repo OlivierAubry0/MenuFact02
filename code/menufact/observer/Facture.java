@@ -147,9 +147,29 @@ public class Facture implements Sujet {
         if (chef == null){
             throw new FactureException("Il ne peut pas y avoir aucun chef pour ajouter un plat.");
         }
+        //if (Jai assez dingredients){
+          //  if (etat instanceof FactureEtatOuverte)
+             //   platchoisi.add(p);
+          //  p.setState(new EnCours(p));
+        //}
+        else{
+            throw new FactureException("Il n'y a pas assez d'ingredients pour le plat choisi.");
+        }
+    }
+
+    public void enleverPlat(PlatChoisi p) throws FactureException, PlatException {
+        if (etat instanceof FactureEtatFermee || etat instanceof FactureEtatPayee){
+            throw new FactureException("On peut enlever un plat seulement sur une facture OUVERTE.");
+        }
+        if (p == null){
+            throw new PlatException("Le plat choisi ne peut pas etre null.");
+        }
+        if (chef == null){
+            throw new FactureException("Il ne peut pas y avoir aucun chef pour enlever un plat.");
+        }
         if (etat instanceof FactureEtatOuverte)
-            platchoisi.add(p);
-            p.setState(new EnCours(p));
+            platchoisi.remove(p);
+        p.setState(new EnCours(p));
     }
 
     /**
@@ -205,6 +225,9 @@ public class Facture implements Sujet {
 
     @Override
     public void addObserver(Observer observer) {
+        if (observers == null) {
+            observers = new ArrayList<>();
+        }
         observers.add(observer);
     }
 
