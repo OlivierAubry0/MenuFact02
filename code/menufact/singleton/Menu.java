@@ -1,14 +1,14 @@
 package menufact.singleton;
 
 import menufact.exceptions.MenuException;
-import menufact.factory.plats.PlatAuMenu;
+import menufact.factory.plats.*;
 
 import java.util.ArrayList;
 
 public class Menu {
     private String description;
     private int courant;
-    private ArrayList<PlatAuMenu> plat = new ArrayList<PlatAuMenu>();
+    private ArrayList<PlatAuMenu> plats = new ArrayList<PlatAuMenu>();
 
     private Menu(String description) {
         this.description = description;
@@ -16,7 +16,7 @@ public class Menu {
 
    public void ajoute (PlatAuMenu p)
     {
-        plat.add(p);
+        plats.add(p);
     }
 
     public void position(int i)
@@ -30,12 +30,12 @@ public class Menu {
     }
     public PlatAuMenu platCourant()
     {
-        return plat.get(courant);
+        return plats.get(courant);
     }
 
     public void positionSuivante() throws MenuException
     {
-        if (courant+1 >= plat.size())
+        if (courant+1 >= plats.size())
             throw new MenuException("On depasse le nombre maximal de plats.");
         else
             courant++;
@@ -49,13 +49,29 @@ public class Menu {
             courant--;
     }
 
+    public int getPosition() {
+        return courant;
+    }
+    public String getDescription() { return description; }
+    public PlatAuMenu getPlatAuMenu(int code){
+        for(PlatAuMenu plat : plats){
+            if(plat.getCode() == code){
+                return plat;
+            }
+        }
+        FactoryPlatAuMenu factory = new FactoryPlatAuMenu();
+        PlatAuMenu plat = factory.createPlat();
+        plat.setDescription("Le plat n'est pas au menu");
+        return plat;
+    }
+    public void setDescription(String description) { this.description = description; }
 
     @Override
     public String toString() {
         return "menufact.Menu{" +
                 "description='" + description + '\'' +
                 ", courant=" + courant +
-                ", plat=" + "\n" + plat +
+                ", plat=" + "\n" + plats +
                 '}';
     }
 }

@@ -1,2 +1,4 @@
-package menufact.factory.plats.exceptions;public class FactoryPlatSante {
+package menufact.factory.plats;
+
+public class FactoryPlatSante {
 }

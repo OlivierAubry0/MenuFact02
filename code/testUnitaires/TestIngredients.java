@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class FactoryIngredientsTest {
+class TestIngredients {
 
     private FactoryIngredient lait;
     private FactoryIngredient epice;
