@@ -1,5 +1,6 @@
 package menufact.factory.plats;
 
+import menufact.Builder.Recette;
 import menufact.factory.exceptions.PlatException;
 import menufact.factory.plats.PlatAuMenu;
 
@@ -7,8 +8,7 @@ public class PlatSante extends PlatAuMenu {
     private double kcal;
     private double chol;
     private double gras;
-
-    public PlatSante(int code, String description, double prix, double kcal, double chol, double gras) throws PlatException {
+    public PlatSante(int code, String description, double prix, double kcal, double chol, double gras, Recette recette) throws PlatException {
         super(code, description, prix);
         this.kcal = kcal;
         this.chol = chol;
@@ -38,9 +38,5 @@ public class PlatSante extends PlatAuMenu {
     public double getGras() {
         return gras;
     }
-
-    @Override
-    public void AfficherPlat() {
-        System.out.println("Plat sante");
-    }
 }
+

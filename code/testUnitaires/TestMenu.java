@@ -5,6 +5,7 @@ package testUnitaires;
 import menufact.singleton.Menu;
 import menufact.exceptions.MenuException;
 import menufact.factory.plats.*;
+import menufact.factory.exceptions.PlatException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,31 +19,37 @@ import org.junit.jupiter.api.Test;
 class TestMenu {
     private Menu menu;
     private ArrayList<PlatAuMenu> platAuMenu;
-    private FactoryPlatAuMenu factoryPlatAuMenu;
+    private PlatFactory factoryPlatAuMenu;
 
     @BeforeEach
     public void setup() {
         menu = Menu.getMenu("resto");
-        factoryPlatAuMenu = new FactoryPlatAuMenu();
+        factoryPlatAuMenu = new PlatFactory();
         platAuMenu = new ArrayList<>();
-        for(int i = 0; i < 5; i++) {
-            PlatAuMenu plat = factoryPlatAuMenu.createPlat();
-            platAuMenu.add(plat);
-            menu.ajoute(plat);
-            platAuMenu.get(i).setCode(i);
-            platAuMenu.get(i).setDescription("plat" + i);
+        for (int i = 0; i < 5; i++) {
+            try {
+                PlatAuMenu plat = factoryPlatAuMenu.createPlat("AuMenu", i, "plat" + i, 10.0, 0, 0, 0, 0);
+                platAuMenu.add(plat);
+                menu.ajoute(plat);
+            } catch (PlatException e) {
+                e.printStackTrace();
+            }
         }
         menu.setDescription("La roulotte a graton");
     }
 
+
     @Test
     public void ajoute() {
-        PlatAuMenu plat = factoryPlatAuMenu.createPlat();
-        plat.setCode(10);
-        plat.setDescription("Plat Ajoute");
-        menu.ajoute(plat);
-        Assertions.assertEquals(plat, menu.getPlatAuMenu(plat.getCode()));
+        try {
+            PlatAuMenu plat = factoryPlatAuMenu.createPlat("AuMenu", 10, "Plat Ajoute", 15.0, 0, 0, 0, 0);
+            menu.ajoute(plat);
+            Assertions.assertEquals(plat, menu.getPlatAuMenu(plat.getCode()));
+        } catch (PlatException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @Test
     public void position() throws MenuException {

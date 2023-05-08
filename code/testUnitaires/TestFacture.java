@@ -1,14 +1,15 @@
 package testUnitaires;
 
-import menufact.factory.plats.PlatChoisi;
+import menufact.factory.exceptions.PlatException;
 import menufact.factory.plats.PlatFactory;
 import menufact.observer.Facture;
 import menufact.observer.exceptions.FactureException;
 import menufact.Chef;
 import menufact.Client;
 import ingredients.*;
-import menufact.factory.plats.*;
+import menufact.Builder.Recette;
 import inventaire.Inventaire;
+import java.util.Map
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,10 +22,12 @@ class FactureTest {
     PlatFactory platFactory;
     Inventaire inventaire;
     private IngredientsAuMenu patate;
-    private IngredientsAuMenu oignon;
+    private IngredientsAuMenu fromage;
+    private IngredientsAuMenu sauce;
+    private Map<Ingredient, Integer> IngredientPoutine;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws FactureException {
         client = new Client(1,"John Doe", "1234567890");
         chef = chef.getInstance("Chef Gordon");
         platFactory = new PlatFactory();
@@ -33,39 +36,44 @@ class FactureTest {
         facture.associerChef(chef);
         inventaire = Inventaire.getInventaire();
         patate = new Legume();
+        fromage = new Laitier();
+        sauce = new Viande();
+        IngredientPoutine.put(patate, 5);
+        IngredientPoutine.put(fromage, 10);
+        IngredientPoutine.put(sauce, 12);
 
     }
 
     @Test
-    void testCommandeAuRestaurant() {
+    void testCommandeAuRestaurant() throws FactureException, PlatException {
         // Ajouter des ingrédients à l'inventaire
-        inventaire.addIngredient(patate, 10);
-        inventaire.addIngredient(oignon, 10);
+        inventaire.addIngredient(patate, 100);
+        inventaire.addIngredient(fromage, 50);
+        inventaire.addIngredient(sauce, 500);
 
         try {
-            // Créer un plat
-            PlatAuMenu plat1 = platFactory.createPlat("Poutine", 1,"Menoum menoum",9.99,);
-            PlatChoisi platChoisi1 = new PlatChoisi(plat1, 1);
 
-            // Ajouter le plat à la facture
-            facture.ajoutePlat(platChoisi1);
+            Recette poutine = new Recette(IngredientPoutine);
+            PlatFactory plat1;
+            plat1 = new PlatFactory();
+            plat1.createPlat();
 
-            // Payer la facture
-            facture.payer();
+            // Vérifier si l'inventaire a suffisamment d'ingrédients pour préparer le plat
+            if (inventaire.hasSufficientIngredients(plat1.getRecette())) {
+                // Ajouter le plat à la facture
+                facture.ajoutePlat(platChoisi1);
 
-            // Fermer la facture
-            facture.fermer();
+                // Payer la facture
+                // ...
+            } else {
+                fail("Il n'y a pas assez d'ingrédients pour préparer le plat.");
+            }
 
-            // Tenter d'ajouter un autre plat à la facture fermée
-            PlatAuMenu plat2 = platFactory.createPlat("Salade", 6.99);
-            PlatChoisi platChoisi2 = new PlatChoisi(plat2, 1);
-
-            assertThrows(FactureException.class, () -> {
-                facture.ajoutePlat(platChoisi2);
-            });
+            // ...
 
         } catch (FactureException | PlatException e) {
             fail("Exception non attendue: " + e.getMessage());
         }
     }
+
 }

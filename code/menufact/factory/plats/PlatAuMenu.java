@@ -1,32 +1,19 @@
 package menufact.factory.plats;
 
 import menufact.factory.exceptions.PlatException;
-import ingredients.IngredientsAuMenu;
-import menufact.factory.plats.Plat;
+import menufact.Builder.Recette;
 
-import menufact.factory.exceptions.PlatException;
-import ingredients.IngredientsAuMenu;
-import java.util.Map;
-import java.util.HashMap;
-public class PlatAuMenu implements Plat{
+public class PlatAuMenu implements Plat {
     private int code;
     private String description;
     private double prix;
-    private Map<IngredientsAuMenu, Integer> ingredients = new HashMap<>();
-    public Map<IngredientsAuMenu, Integer> getIngredients() { return ingredients; }
+    private Recette recette;
 
-    public PlatAuMenu(int code, String description, double prix) throws PlatException {
+    public PlatAuMenu(int code, String description, double prix, Recette recette) {
         this.code = code;
         this.description = description;
-        if(prix >=0) {
-            this.prix = prix;
-        }
-        else{
-            throw new PlatException("number below zero");
-        }
-    }
-    public void setIngredients(IngredientsAuMenu ingredient, Integer quantity) {
-        this.ingredients.put(ingredient, quantity);
+        this.prix = prix;
+        this.recette = recette;
     }
 
     public PlatAuMenu() {
@@ -65,8 +52,11 @@ public class PlatAuMenu implements Plat{
         this.prix = prix;
     }
 
-    @Override
-    public void AfficherPlat() {
-        System.out.println("Plat au menu");
+    public Recette getRecette() {
+        return recette;
+    }
+
+    public void setRecette(Recette recette) {
+        this.recette = recette;
     }
 }

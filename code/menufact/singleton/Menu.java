@@ -2,6 +2,7 @@ package menufact.singleton;
 
 import menufact.exceptions.MenuException;
 import menufact.factory.plats.*;
+import menufact.factory.exceptions.PlatException;
 
 import java.util.ArrayList;
 
@@ -14,37 +15,34 @@ public class Menu {
         this.description = description;
     }
 
-   public void ajoute (PlatAuMenu p)
-    {
+    public void ajoute(PlatAuMenu p) {
         plats.add(p);
     }
 
-    public void position(int i)
-    {
+    public void position(int i) {
         courant = i;
     }
 
     public static Menu menu;
+
     public static Menu getMenu(String description) {
         return menu = (menu == null) ? new Menu(description) : menu;
     }
-    public PlatAuMenu platCourant()
-    {
+
+    public PlatAuMenu platCourant() {
         return plats.get(courant);
     }
 
-    public void positionSuivante() throws MenuException
-    {
-        if (courant+1 >= plats.size())
-            throw new MenuException("On depasse le nombre maximal de plats.");
+    public void positionSuivante() throws MenuException {
+        if (courant + 1 >= plats.size())
+            throw new MenuException("On dépasse le nombre maximal de plats.");
         else
             courant++;
     }
 
-    public void positionPrecedente() throws MenuException
-    {
-        if (courant-1 < 0)
-            throw new MenuException("On depasse le nombre minimal de plats");
+    public void positionPrecedente() throws MenuException {
+        if (courant - 1 < 0)
+            throw new MenuException("On dépasse le nombre minimal de plats");
         else
             courant--;
     }
@@ -52,19 +50,29 @@ public class Menu {
     public int getPosition() {
         return courant;
     }
-    public String getDescription() { return description; }
-    public PlatAuMenu getPlatAuMenu(int code){
-        for(PlatAuMenu plat : plats){
-            if(plat.getCode() == code){
+
+    public String getDescription() {
+        return description;
+    }
+
+    public PlatAuMenu getPlatAuMenu(int code) {
+        for (PlatAuMenu plat : plats) {
+            if (plat.getCode() == code) {
                 return plat;
             }
         }
-        FactoryPlatAuMenu factory = new FactoryPlatAuMenu();
-        PlatAuMenu plat = factory.createPlat();
-        plat.setDescription("Le plat n'est pas au menu");
-        return plat;
+        try {
+            PlatAuMenu plat = PlatFactory.createPlat("AuMenu", -1, "Le plat n'est pas au menu", 0, 0, 0, 0, 0);
+            return plat;
+        } catch (PlatException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-    public void setDescription(String description) { this.description = description; }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Override
     public String toString() {

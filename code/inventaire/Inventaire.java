@@ -1,6 +1,7 @@
 package inventaire;
 
-import ingredients.IngredientsAuMenu;
+import ingredients.*;
+import menufact.Builder.Recette;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,4 +64,17 @@ public class Inventaire {
     }
 
     public Map<IngredientsAuMenu, Integer> getIngredients() { return ingredients; }
+    public boolean hasSufficientIngredients(Recette recette) {
+        for (Map.Entry<Ingredient, Integer> entry : recette.getIngredients().entrySet()) {
+            Ingredient ingredient = entry.getKey();
+            Integer requiredQuantity = entry.getValue();
+
+            Integer availableQuantity = ingredients.get(ingredient);
+            if (availableQuantity == null || availableQuantity < requiredQuantity) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

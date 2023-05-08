@@ -6,15 +6,14 @@ import menufact.factory.plats.PlatAuMenu;
 import menufact.state.Commande;
 import menufact.state.StatePreparation;
 
-public class PlatChoisi extends Plat {
+public class PlatChoisi extends PlatAuMenu{
     private PlatAuMenu plat;
     private int quantite;
     private StatePreparation state;
 
     public PlatChoisi(PlatAuMenu plat, int quantite) {
-        this.plat = plat;
+        super(plat.getCode(), plat.getDescription(), plat.getPrix(), plat.getRecette());
         this.quantite = quantite;
-        this.state = new Commande(this);
     }
 
     public int getQuantite() {
@@ -44,9 +43,5 @@ public class PlatChoisi extends Plat {
                 ", plat=" + plat +
                 '}';
     }
-
-    @Override
-    public void AfficherPlat() {
-        System.out.println("Plat choisi");
-    }
 }
+

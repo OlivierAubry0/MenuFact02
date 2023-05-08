@@ -5,10 +5,6 @@ import ingredients.IngredientsAuMenu;
 import java.util.Map;
 
 public interface Plat {
-    Map<IngredientsAuMenu, Integer> getIngredients();
-
-    void setIngredients(IngredientsAuMenu ingredient, Integer quantity);
-
     int getCode();
 
     void setCode(int code);
