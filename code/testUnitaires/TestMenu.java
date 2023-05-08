@@ -19,7 +19,6 @@ class TestMenu {
     private Menu menu;
     private ArrayList<PlatAuMenu> platAuMenu;
     private FactoryPlatAuMenu factoryPlatAuMenu;
-    private int counter = 0;
 
     @BeforeEach
     public void setup() {
