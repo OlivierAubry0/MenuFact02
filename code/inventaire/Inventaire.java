@@ -12,6 +12,12 @@ public class Inventaire {
     private Inventaire() {
     }
 
+    public class InsufficientQuantityException extends Exception {
+        public InsufficientQuantityException(String message) {
+            super(message);
+        }
+    }
+
     /**
      * @return une instance de l'ingredients.inventaire (toujours la même)
      */
@@ -27,6 +33,20 @@ public class Inventaire {
      */
     public void addIngredient(IngredientsAuMenu ingredient, Integer quantity) {
         this.ingredients.put(ingredient,quantity);
+    }
+
+    public void removeIngredient(IngredientsAuMenu ingredient, Integer quantityToRemove) throws InsufficientQuantityException {
+        Integer currentQuantity = ingredients.get(ingredient);
+
+        if (currentQuantity == null) {
+            throw new InsufficientQuantityException("L'ingrédient " + ingredient + " n'est pas présent dans l'inventaire.");
+        }
+
+        if (currentQuantity >= quantityToRemove) {
+            ingredients.put(ingredient, currentQuantity - quantityToRemove);
+        } else {
+            throw new InsufficientQuantityException("La quantité à retirer (" + quantityToRemove + ") est supérieure à la quantité disponible (" + currentQuantity + ").");
+        }
     }
 
     /**

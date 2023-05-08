@@ -147,11 +147,7 @@ public class Facture implements Sujet {
         if (chef == null){
             throw new FactureException("Il ne peut pas y avoir aucun chef pour ajouter un plat.");
         }
-        //if (Jai assez dingredients){
-          //  if (etat instanceof FactureEtatOuverte)
-             //   platchoisi.add(p);
-          //  p.setState(new EnCours(p));
-        //}
+
         else{
             throw new FactureException("Il n'y a pas assez d'ingredients pour le plat choisi.");
         }
