@@ -1,2 +1,5 @@
-package ingredients;public class Laitier {
+package ingredients;
+
+public class Laitier extends IngredientsAuMenu{
+    public Laitier(){setType(TypeIngredient.LAITIER);}
 }

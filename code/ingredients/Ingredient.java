@@ -1,35 +1,17 @@
 package ingredients;
 
-import ingredients.etat.IngredientEtat;
 
-public class Ingredient {
-    private String nom;
-    private String description;
-    private TypeIngredient typeIngredient;
 
-    protected IngredientEtat etat;
+public interface Ingredient {
+    String getNom();
 
-    public String getNom() {
-        return nom;
-    }
+    void setNom(String nom);
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+    String getDescription();
 
-    public String getDescription() {
-        return description;
-    }
+    void setDescription(String description);
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    TypeIngredient getType();
 
-    public TypeIngredient getTypeIngredient() {
-        return typeIngredient;
-    }
-
-    public void setTypeIngredient(TypeIngredient typeIngredient) {
-        this.typeIngredient = typeIngredient;
-    }
+    void setType(TypeIngredient type);
 }

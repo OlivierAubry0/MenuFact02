@@ -1,7 +1,9 @@
 package ingredients;
 
-public class Fruit extends Ingredient{
+public class Fruit extends IngredientsAuMenu{
     public Fruit() {
-        setTypeIngredient(TypeIngredient.FRUIT);
+        setType(TypeIngredient.FRUIT);
     }
+
+
 }

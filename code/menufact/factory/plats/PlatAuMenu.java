@@ -1,7 +1,7 @@
 package menufact.factory.plats;
 
 import menufact.factory.plats.exceptions.PlatException;
-import ingredients.exceptions.IngredientsAuMenu;
+import ingredients.IngredientsAuMenu;
 import java.util.Map;
 import java.util.HashMap;
 public class PlatAuMenu {

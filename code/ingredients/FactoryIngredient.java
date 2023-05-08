@@ -1,2 +1,6 @@
-package ingredients;public class FactoryIngredient {
+package ingredients;
+
+public interface FactoryIngredient {
+
+    Ingredient createIngredients();
 }
