@@ -1,4 +1,5 @@
 package ingredients;
+import ingredients.etat.IngredientEtat;
 
 
 
@@ -14,4 +15,8 @@ public interface Ingredient {
     TypeIngredient getType();
 
     void setType(TypeIngredient type);
+
+    IngredientEtat getEtat();
+
+    void setEtat(IngredientEtat etat);
 }

@@ -1,8 +1,11 @@
 package ingredients;
+import ingredients.etat.IngredientEtat;
 
 public abstract class IngredientsAuMenu implements Ingredient {
     private String nom;
     private String description;
+
+    private IngredientEtat etat;
     protected TypeIngredient type;
 
     public IngredientsAuMenu() {}
@@ -30,6 +33,14 @@ public abstract class IngredientsAuMenu implements Ingredient {
 
     public void setType(TypeIngredient type) {
         this.type = type;
+    }
+
+    public IngredientEtat getEtat() {
+        return etat;
+    }
+
+    public void setEtat(IngredientEtat etat) {
+        this.etat = etat;
     }
 
     /**

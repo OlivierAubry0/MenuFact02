@@ -1,2 +1,8 @@
-package ingredients.etat;public class IngredientLiquide {
+package ingredients.etat;
+
+public class IngredientLiquide extends IngredientEtat {
+
+    public IngredientLiquide() {
+        super("ml");
+    }
 }

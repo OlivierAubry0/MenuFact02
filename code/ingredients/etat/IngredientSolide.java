@@ -1,2 +1,7 @@
-package ingredients.etat;public class IngredientSolide {
+package ingredients.etat;
+
+public class IngredientSolide extends IngredientEtat{
+    public IngredientSolide() {
+        super("g");
+    }
 }
