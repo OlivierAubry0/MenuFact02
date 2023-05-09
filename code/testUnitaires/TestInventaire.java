@@ -21,11 +21,8 @@ class TestInventaire {
     @BeforeEach
     public void setUp() throws Exception {
         inventaire = Inventaire.getInventaire();
-        epice.setEtatIngredient(EtatIngredient.SOLIDE);
-        epice.setNom("Poivre");
-        epice.setTypeIngredient(TypeIngredient.EPICE);
-        epice.setQuantite(2);
-        ingredient.put(epice,1);
+        epice = new Epice("Poivre", EtatIngredient.SOLIDE, 1);
+        ingredient.put(epice,2);
     }
 
     @Test
