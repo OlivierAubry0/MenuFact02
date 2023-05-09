@@ -25,6 +25,12 @@ public class Facture extends Observable {
     private final double TPS = 0.05;
     private final double TVQ = 0.095;
 
+    /**
+     * Constructs a bill with the specified description, client, and chef.
+     * @param description the description of the bill
+     * @param client the client for whom the bill is intended
+     * @param chef the chef responsible for cooking the dishes of the bill
+     */
     public Facture(String description, Client client, Chef chef) {
         this.date = new Date();
         this.description = description;
@@ -34,26 +40,50 @@ public class Facture extends Observable {
         this.platchoisi = new ArrayList<>();
         this.observers = new ArrayList<>();
     }
-    public void associerClient (Client client)
-    {
+
+    /**
+     * Associates a client with the bill.
+     * @param client the client to associate with the bill
+     */
+    public void associerClient (Client client) {
         this.client = client;
     }
+
+    /**
+     * Associates a chef with the bill.
+     * @param chef the chef to associate with the bill
+     */
     public void associerChef(Chef chef) {
         this.chef = chef;
     }
-    public double sousTotal()
-    {
-        double soustotal=0;
+
+    /**
+     * Calculates the subtotal of the bill.
+     * @return the subtotal of the bill
+     */
+    public double sousTotal() {
+        double soustotal = 0;
         for (PlatChoisi p : platchoisi)
             soustotal += p.getQuantite() * p.getPrix();
         return soustotal;
     }
+
+    /**
+     * Calculates the total of the bill including taxes.
+     * @return the total of the bill including taxes
+     */
     public double total(){
         return sousTotal()+tps()+tvq();
     }
+
+    /**
+     * Calculates the amount of the Quebec Sales Tax on the bill.
+     * @return the amount of the Quebec Sales Tax on the bill
+     */
     private double tps(){
         return TPS*sousTotal();
     }
+
     private  double tvq(){
         return TVQ*(TPS+1)*sousTotal();
     }
@@ -80,7 +110,11 @@ public class Facture extends Observable {
         else
             throw new FactureException("La facture ne peut pas être reouverte.");
     }
+    /**
 
+     Returns the state of the bill.
+     @return The state of the bill.
+     */
     public FactureEtat getEtat()
     {
         return etat;
@@ -93,7 +127,13 @@ public class Facture extends Observable {
         this.platchoisi = new ArrayList<>();
         this.observers = new ArrayList<>();
     }
+    /**
 
+     Adds a dish to the bill.
+     @param p The dish to add.
+     @throws FactureException if the bill is closed or paid, or if there is no chef or if the dish is null.
+     @throws PlatException if the dish is null.
+     */
     public void ajoutePlat(PlatChoisi p) throws FactureException, PlatException {
         if (etat instanceof FactureEtatFermee || etat instanceof FactureEtatPayee){
             throw new FactureException("On peut ajouter un plat seulement sur une facture OUVERTE.");
@@ -122,6 +162,13 @@ public class Facture extends Observable {
                 ", TVQ=" + TVQ +
                 '}';
     }
+
+    /**
+
+     Generates a bill as a string.
+
+     @return The generated bill as a string.
+     */
     public String genererFacture() {
         StringBuilder factureGenere = new StringBuilder();
         int i = 1;
@@ -145,6 +192,12 @@ public class Facture extends Observable {
 
         return factureGenere.toString();
     }
+
+    /**
+
+     Returns the list of dishes on the bill.
+     @return The list of dishes on the bill.
+     */
     public ArrayList<PlatChoisi> getPlats() {
         return this.platchoisi;
     }
