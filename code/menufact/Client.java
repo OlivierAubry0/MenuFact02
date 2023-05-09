@@ -44,7 +44,3 @@ public class Client {
                 '}';
     }
 }
-/*
-@startuml
-class menufact.Client{}
-* */

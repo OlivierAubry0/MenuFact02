@@ -1,9 +1,19 @@
 package ingredients;
 
-public class Ingredient {
+import ingredients.etat.EtatIngredient;
+
+public abstract class Ingredient {
     private String nom;
-    private String description;
     private TypeIngredient typeIngredient;
+    private EtatIngredient etatIngredient;
+    private double quantite;
+
+    public Ingredient(String nom, TypeIngredient typeIngredient, EtatIngredient etatIngredient, double quantite) {
+        this.nom = nom;
+        this.typeIngredient = typeIngredient;
+        this.etatIngredient = etatIngredient;
+        this.quantite = quantite;
+    }
 
     public String getNom() {
         return nom;
@@ -13,19 +23,27 @@ public class Ingredient {
         this.nom = nom;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public TypeIngredient getTypeIngredient() {
         return typeIngredient;
     }
 
     public void setTypeIngredient(TypeIngredient typeIngredient) {
         this.typeIngredient = typeIngredient;
+    }
+
+    public EtatIngredient getEtatIngredient() {
+        return etatIngredient;
+    }
+
+    public void setEtatIngredient(EtatIngredient etatIngredient) {
+        this.etatIngredient = etatIngredient;
+    }
+
+    public double getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(double quantite) {
+        this.quantite = quantite;
     }
 }
