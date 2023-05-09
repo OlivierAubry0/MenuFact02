@@ -1,6 +1,5 @@
 package menufact.observer.MVC;
 
-import menufact.observer.Facture;
 import menufact.observer.Observer;
 
 import javax.swing.*;
@@ -49,8 +48,9 @@ public class FactureVue implements Observer {
     public void hide() {
         frame.setVisible(false);
     }
+    @Override
     public void actualiser(String message) {
-
+        updateTextArea(message);
     }
 }
 

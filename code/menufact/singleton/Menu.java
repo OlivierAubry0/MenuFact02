@@ -3,13 +3,16 @@ package menufact.singleton;
 import menufact.exceptions.MenuException;
 import menufact.factory.plats.*;
 import menufact.factory.exceptions.PlatException;
-
+import menufact.Builder.Recette;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 
 public class Menu {
     private String description;
     private int courant;
     private ArrayList<PlatAuMenu> plats = new ArrayList<PlatAuMenu>();
+    private static Map<Integer, Recette> recettesParPlat = new HashMap<>();
 
     private Menu(String description) {
         this.description = description;
@@ -19,6 +22,19 @@ public class Menu {
         plats.add(p);
     }
 
+    public static void associerRecetteAuPlat(PlatAuMenu plat, Recette recette) {
+        recettesParPlat.put(plat.getCode(), recette);
+    }
+
+    public Recette getRecettePourPlat(PlatAuMenu plat) throws MenuException {
+        Recette recette = recettesParPlat.get(plat.getCode());
+        if (recette == null) {
+            throw new MenuException("Aucune recette associée à ce plat: " + plat.getCode());
+        }
+        return recette;
+    }
+
+
     public void position(int i) {
         courant = i;
     }
@@ -26,7 +42,10 @@ public class Menu {
     public static Menu menu;
 
     public static Menu getMenu(String description) {
-        return menu = (menu == null) ? new Menu(description) : menu;
+        if (menu == null) {
+            menu = new Menu(description);
+        }
+        return menu;
     }
 
     public PlatAuMenu platCourant() {
@@ -34,16 +53,12 @@ public class Menu {
     }
 
     public void positionSuivante() throws MenuException {
-        if (courant + 1 >= plats.size())
-            throw new MenuException("On dépasse le nombre maximal de plats.");
-        else
+        if (courant + 1 <= plats.size())
             courant++;
     }
 
     public void positionPrecedente() throws MenuException {
-        if (courant - 1 < 0)
-            throw new MenuException("On dépasse le nombre minimal de plats");
-        else
+        if (courant - 1 > 0)
             courant--;
     }
 
@@ -55,19 +70,13 @@ public class Menu {
         return description;
     }
 
-    public PlatAuMenu getPlatAuMenu(int code) {
+    public PlatAuMenu getPlatAuMenu(int code) throws MenuException {
         for (PlatAuMenu plat : plats) {
             if (plat.getCode() == code) {
                 return plat;
             }
         }
-        try {
-            PlatAuMenu plat = PlatFactory.createPlat("AuMenu", -1, "Le plat n'est pas au menu", 0, 0, 0, 0, 0);
-            return plat;
-        } catch (PlatException e) {
-            e.printStackTrace();
-            return null;
-        }
+        throw new MenuException("Le plat avec le code " + code + " n'est pas au menu.");
     }
 
     public void setDescription(String description) {

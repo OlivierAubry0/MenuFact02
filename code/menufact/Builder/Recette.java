@@ -5,27 +5,18 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Recette {
-    private Map<Ingredient, Integer> ingredients;
+    private Map<Ingredient, Double> ingredients;
 
-    public Recette(Map<Ingredient, Integer> ingredients) {
-        this.ingredients = ingredients;
+    public Recette() {
+        ingredients = new HashMap<>();
     }
 
-    public Map<Ingredient, Integer> getIngredients() {
+    public void addIngredient(Ingredient ingredient, double quantity) {
+        ingredients.put(ingredient, quantity);
+    }
+
+    public Map<Ingredient, Double> getIngredients() {
         return ingredients;
-    }
-
-    public void setIngredients(Map<Ingredient, Integer> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public void afficherIngredients() {
-        System.out.println("Liste des ingrédients pour cette recette :");
-        for (Map.Entry<Ingredient, Integer> entry : ingredients.entrySet()) {
-            Ingredient ingredient = entry.getKey();
-            Integer quantity = entry.getValue();
-            System.out.println(ingredient.getNom() + ": " + quantity);
-        }
     }
 }
 

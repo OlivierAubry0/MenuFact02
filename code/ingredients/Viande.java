@@ -1,7 +1,9 @@
 package ingredients;
 
-public class Viande extends IngredientsAuMenu{
-    public Viande() {
-        setType(TypeIngredient.VIANDE);
+import ingredients.etat.IngredientEtat;
+
+public class Viande extends Ingredient{
+    public Viande(String nom, IngredientEtat etat, double quantite) {
+        super(nom, TypeIngredient.VIANDE, etat, quantite);
     }
 }

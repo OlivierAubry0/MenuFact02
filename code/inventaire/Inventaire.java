@@ -1,6 +1,9 @@
 package inventaire;
 
-import ingredients.*;
+import ingredients.Ingredient;
+import ingredients.TypeIngredient;
+import ingredients.IngredientsAuMenu;
+import ingredients.etat.EtatIngredient;
 import menufact.Builder.Recette;
 
 import java.util.HashMap;
@@ -8,73 +11,41 @@ import java.util.Map;
 
 public class Inventaire {
     private static Inventaire inventaire;
-    private Map<IngredientsAuMenu,Integer> ingredients = new HashMap<>();
+    private Map<Ingredient, Double> ingredients = new HashMap<>();
+    private IngredientsAuMenu ingredientsAuMenu = new IngredientsAuMenu();
 
     private Inventaire() {
     }
 
-    public class InsufficientQuantityException extends Exception {
-        public InsufficientQuantityException(String message) {
-            super(message);
-        }
-    }
-
-    /**
-     * @return une instance de l'ingredients.inventaire (toujours la même)
-     */
     public static Inventaire getInventaire() {
         if (inventaire == null)
             inventaire = new Inventaire();
         return inventaire;
     }
 
-    /**
-     * @param ingredient est l'ingredient a ajoute
-     * @param quantity est la quantite de l'ingredient ajoute
-     */
-    public void addIngredient(IngredientsAuMenu ingredient, Integer quantity) {
-        this.ingredients.put(ingredient,quantity);
+    public void addIngredient(String nom, TypeIngredient type, EtatIngredient etat, double quantite) {
+        Ingredient ingredient = ingredientsAuMenu.getIngredient(nom,quantite, type, etat);
+        ingredients.put(ingredient, ingredients.getOrDefault(ingredient, 0.0) + quantite);
     }
 
-    public void removeIngredient(IngredientsAuMenu ingredient, Integer quantityToRemove) throws InsufficientQuantityException {
-        Integer currentQuantity = ingredients.get(ingredient);
-
-        if (currentQuantity == null) {
-            throw new InsufficientQuantityException("L'ingrédient " + ingredient + " n'est pas présent dans l'inventaire.");
+    public void removeIngredient(String nom, TypeIngredient type, EtatIngredient etat, double quantite) {
+        Ingredient ingredient = ingredientsAuMenu.getIngredient(nom, quantite, type, etat);
+        Double currentQuantity = ingredients.get(ingredient);
+        if (currentQuantity == null || currentQuantity < quantite) {
+            throw new IllegalArgumentException("Not enough ingredient in inventory.");
         }
-
-        if (currentQuantity >= quantityToRemove) {
-            ingredients.put(ingredient, currentQuantity - quantityToRemove);
-        } else {
-            throw new InsufficientQuantityException("La quantité à retirer (" + quantityToRemove + ") est supérieure à la quantité disponible (" + currentQuantity + ").");
-        }
+        ingredients.put(ingredient, currentQuantity - quantite);
     }
 
-    /**
-     * @return l'ingredients.inventaire des ingredients et la quantite de chacun
-     */
-    @Override
-    public String toString() {
-        String text = "";
-        for (Map.Entry<IngredientsAuMenu, Integer> entry: ingredients.entrySet()) {
-            text += (entry.getKey() + ", quantite : " + entry.getValue()) +
-                    "\n";
-        }
-        return text;
-    }
-
-    public Map<IngredientsAuMenu, Integer> getIngredients() { return ingredients; }
     public boolean hasSufficientIngredients(Recette recette) {
-        for (Map.Entry<Ingredient, Integer> entry : recette.getIngredients().entrySet()) {
+        for (Map.Entry<Ingredient, Double> entry : recette.getIngredients().entrySet()) {
             Ingredient ingredient = entry.getKey();
-            Integer requiredQuantity = entry.getValue();
-
-            Integer availableQuantity = ingredients.get(ingredient);
+            Double requiredQuantity = entry.getValue();
+            Double availableQuantity = ingredients.get(ingredient);
             if (availableQuantity == null || availableQuantity < requiredQuantity) {
                 return false;
             }
         }
         return true;
     }
-
 }

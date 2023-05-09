@@ -6,6 +6,7 @@ import menufact.singleton.Menu;
 import menufact.exceptions.MenuException;
 import menufact.factory.plats.*;
 import menufact.factory.exceptions.PlatException;
+import menufact.Builder.Recette;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,13 +28,10 @@ class TestMenu {
         factoryPlatAuMenu = new PlatFactory();
         platAuMenu = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            try {
-                PlatAuMenu plat = factoryPlatAuMenu.createPlat("AuMenu", i, "plat" + i, 10.0, 0, 0, 0, 0);
-                platAuMenu.add(plat);
-                menu.ajoute(plat);
-            } catch (PlatException e) {
-                e.printStackTrace();
-            }
+            Recette recette = new Recette(); // Ajoutez les ingrédients nécessaires à la recette ici.
+            PlatAuMenu plat = factoryPlatAuMenu.createPlat(3, "oui oui", 15.45, recette);
+            platAuMenu.add(plat);
+            menu.ajoute(plat);
         }
         menu.setDescription("La roulotte a graton");
     }
@@ -42,10 +40,11 @@ class TestMenu {
     @Test
     public void ajoute() {
         try {
-            PlatAuMenu plat = factoryPlatAuMenu.createPlat("AuMenu", 10, "Plat Ajoute", 15.0, 0, 0, 0, 0);
+            Recette recette = new Recette(); // Ajoutez les ingrédients nécessaires à la recette ici.
+            PlatAuMenu plat = factoryPlatAuMenu.createPlat(3, "oui oui", 15.45, recette);
             menu.ajoute(plat);
             Assertions.assertEquals(plat, menu.getPlatAuMenu(plat.getCode()));
-        } catch (PlatException e) {
+        } catch (MenuException e) {
             e.printStackTrace();
         }
     }
@@ -64,7 +63,7 @@ class TestMenu {
     }
 
     @Test
-    public void getPlatAuMenu() {
+    public void getPlatAuMenu() throws MenuException {
         Assertions.assertEquals(platAuMenu.get(1).getCode(), menu.getPlatAuMenu(platAuMenu.get(1).getCode()).getCode());
         Assertions.assertEquals(platAuMenu.get(1).getDescription(), menu.getPlatAuMenu(platAuMenu.get(1).getCode()).getDescription());
     }

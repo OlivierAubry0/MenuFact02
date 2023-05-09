@@ -1,5 +1,9 @@
 package ingredients;
 
-public class Epice extends IngredientsAuMenu{
-    public Epice() {setType((TypeIngredient.EPICE));}
+import ingredients.etat.IngredientEtat;
+
+public class Epice extends Ingredient{
+    public Epice(String nom, IngredientEtat etat, double quantite) {
+        super(nom,TypeIngredient.EPICE, etat, quantite);
+    }
 }

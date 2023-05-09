@@ -1,7 +1,15 @@
 package testUnitaires;
 
+import ingredients.Epice;
+import ingredients.Ingredient;
+import ingredients.Laitier;
+import ingredients.Legume;
+import ingredients.etat.EtatIngredient;
+import menufact.Builder.Recette;
+import menufact.Builder.RecetteBuilder;
 import menufact.factory.plats.PlatChoisi;
 import menufact.factory.plats.PlatAuMenu;
+import menufact.singleton.Menu;
 import menufact.state.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +25,16 @@ class TestStatePreparation {
 
     @BeforeEach
     public void setup(){
-        PlatChoisi platChoisi = new PlatChoisi(new PlatAuMenu(), 2);
+        Ingredient Tomate = new Legume("Tomate", EtatIngredient.SOLIDE.getEtat(), 150);
+        Ingredient Fromage = new Laitier("Fromage", EtatIngredient.SOLIDE.getEtat(), 25);
+        Ingredient Sauce = new Epice("Sauce", EtatIngredient.LIQUIDE.getEtat(), 5);
+        RecetteBuilder pizzaBuilder = new RecetteBuilder();
+        pizzaBuilder.addIngredient(Tomate, 3)
+                    .addIngredient(Fromage, 20)
+                    .addIngredient(Sauce, 1);
+        Recette pizza = pizzaBuilder.build();
+        PlatChoisi platChoisi = new PlatChoisi(new PlatAuMenu(3,"Mmm",100.59), 2);
+        Menu.associerRecetteAuPlat(platChoisi,pizza);
         commande = new Commande(platChoisi);
         servie = new Servie(platChoisi);
         terminee = new Terminee(platChoisi);

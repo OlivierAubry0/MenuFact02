@@ -1,34 +1,18 @@
 package testUnitaires;
 
+import ingredients.etat.EtatIngredient;
 import ingredients.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-class TestIngredients {
-
-    private FactoryIngredient lait;
-    private FactoryIngredient epice;
-    private FactoryIngredient fruit;
-    private FactoryIngredient legume;
-    private FactoryIngredient viande;
-
-    @BeforeEach
-    public void setUp() throws Exception {
-        lait = new FactoryLaitier();
-        epice = new FactoryEpice();
-        fruit = new FactoryFruit();
-        legume = new FactoryLegume();
-        viande = new FactoryViande();
-    }
+public class TestIngredients {
 
     @Test
-    void createIngredients() {
-        assertTrue(lait.createIngredients() instanceof Laitier);
-        assertTrue(epice.createIngredients() instanceof Epice);
-        assertTrue(fruit.createIngredients() instanceof Fruit);
-        assertTrue(legume.createIngredients() instanceof Legume);
-        assertTrue(viande.createIngredients() instanceof Viande);
+    void testCreation() {
+        Ingredient ingredient = new Fruit("Pomme",EtatIngredient.SOLIDE, 2);
+        assertEquals("Pomme", ingredient.getNom());
+        assertEquals(TypeIngredient.FRUIT, ingredient.getTypeIngredient());
+        assertEquals("SOLIDE", ingredient.getEtatIngredient().toString());
+        assertEquals(2, ingredient.getQuantite());
     }
 }

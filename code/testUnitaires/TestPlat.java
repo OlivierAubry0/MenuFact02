@@ -1,7 +1,15 @@
 package testUnitaires;
 
+import ingredients.Epice;
+import ingredients.Ingredient;
+import ingredients.Laitier;
+import ingredients.Legume;
+import ingredients.etat.EtatIngredient;
+import menufact.Builder.Recette;
+import menufact.Builder.RecetteBuilder;
 import menufact.factory.plats.*;
 import menufact.factory.exceptions.PlatException;
+import menufact.singleton.Menu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +26,15 @@ class PlatsTest {
 
     @Test
     void testCreatePlatAuMenu() throws PlatException {
-        Plat plat = factory.createPlat("AuMenu", 1, "Pizza", 12.0, 0, 0, 0, 0);
+        Ingredient Tomate = new Legume("Tomate", EtatIngredient.SOLIDE.getEtat(), 150);
+        Ingredient Fromage = new Laitier("Fromage", EtatIngredient.SOLIDE.getEtat(), 25);
+        Ingredient Sauce = new Epice("Sauce", EtatIngredient.LIQUIDE.getEtat(), 5);
+        RecetteBuilder pizzaBuilder = new RecetteBuilder();
+        pizzaBuilder.addIngredient(Tomate, 3)
+                .addIngredient(Fromage, 20)
+                .addIngredient(Sauce, 1);
+        Recette pizza = pizzaBuilder.build();
+        PlatAuMenu plat = factory.createPlat(5, "Pizza", 5.99, pizza);
         assertTrue(plat instanceof PlatAuMenu);
         assertEquals(1, ((PlatAuMenu) plat).getCode());
         assertEquals("Pizza", ((PlatAuMenu) plat).getDescription());
@@ -27,7 +43,15 @@ class PlatsTest {
 
     @Test
     void testCreatePlatEnfant() throws PlatException {
-        Plat plat = factory.createPlat("Enfant", 2, "Burger", 8.0, 0.5, 0, 0, 0);
+        Ingredient Tomate = new Legume("Tomate", EtatIngredient.SOLIDE.getEtat(), 150);
+        Ingredient Fromage = new Laitier("Fromage", EtatIngredient.SOLIDE.getEtat(), 25);
+        Ingredient Sauce = new Epice("Sauce", EtatIngredient.LIQUIDE.getEtat(), 5);
+        RecetteBuilder pizzaBuilder = new RecetteBuilder();
+        pizzaBuilder.addIngredient(Tomate, 3)
+                .addIngredient(Fromage, 20)
+                .addIngredient(Sauce, 1);
+        Recette pizza = pizzaBuilder.build();
+        PlatEnfant plat = factory.createPlatEnfant(2, "Burger", 8.0, pizza, 0.5);
         assertTrue(plat instanceof PlatEnfant);
         assertEquals(2, ((PlatEnfant) plat).getCode());
         assertEquals("Burger", ((PlatEnfant) plat).getDescription());
@@ -37,7 +61,15 @@ class PlatsTest {
 
     @Test
     void testCreatePlatSante() throws PlatException {
-        Plat plat = factory.createPlat("Sante", 3, "Salad", 10.0, 0, 350, 10, 5);
+        Ingredient Tomate = new Legume("Tomate", EtatIngredient.SOLIDE.getEtat(), 150);
+        Ingredient Fromage = new Laitier("Fromage", EtatIngredient.SOLIDE.getEtat(), 25);
+        Ingredient Sauce = new Epice("Sauce", EtatIngredient.LIQUIDE.getEtat(), 5);
+        RecetteBuilder pizzaBuilder = new RecetteBuilder();
+        pizzaBuilder.addIngredient(Tomate, 3)
+                .addIngredient(Fromage, 20)
+                .addIngredient(Sauce, 1);
+        Recette pizza = pizzaBuilder.build();
+        PlatSante plat = factory.createPlatSante(3, "Salad", 10.0, pizza, 350, 10, 5);
         assertTrue(plat instanceof PlatSante);
         assertEquals(3, ((PlatSante) plat).getCode());
         assertEquals("Salad", ((PlatSante) plat).getDescription());
@@ -49,15 +81,19 @@ class PlatsTest {
 
     @Test
     void testCreatePlatChoisi() throws PlatException {
-        Plat plat = factory.createPlat("Choisi", 4, "Pasta", 11.0, 0, 0, 0, 0);
+        Ingredient Tomate = new Legume("Tomate", EtatIngredient.SOLIDE.getEtat(), 150);
+        Ingredient Fromage = new Laitier("Fromage", EtatIngredient.SOLIDE.getEtat(), 25);
+        Ingredient Sauce = new Epice("Sauce", EtatIngredient.LIQUIDE.getEtat(), 5);
+        RecetteBuilder pizzaBuilder = new RecetteBuilder();
+        pizzaBuilder.addIngredient(Tomate, 3)
+                .addIngredient(Fromage, 20)
+                .addIngredient(Sauce, 1);
+        Recette pizza = pizzaBuilder.build();
+        PlatAuMenu platAuMenu = factory.createPlat(4, "Pizza", 11.0, pizza);
+        PlatChoisi plat = new PlatChoisi(platAuMenu, 3);
         assertTrue(plat instanceof PlatChoisi);
-        PlatAuMenu expectedPlatAuMenu = new PlatAuMenu(4, "Pasta", 11.0);
+        PlatAuMenu expectedPlatAuMenu = new PlatAuMenu(4, "Pizza", 11.0);
         assertEquals(expectedPlatAuMenu.toString(), ((PlatChoisi) plat).getPlat().toString());
         assertEquals(1, ((PlatChoisi) plat).getQuantite());
-    }
-
-    @Test
-    void testInvalidPlatType() throws PlatException {
-        assertNull(factory.createPlat("InvalidType", 5, "Invalid", 0, 0, 0, 0, 0));
     }
 }

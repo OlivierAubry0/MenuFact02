@@ -1,34 +1,48 @@
 package ingredients;
-<<<<<<< Updated upstream
+
 import ingredients.etat.IngredientEtat;
-
-
-
-public interface Ingredient {
-    String getNom();
-
-    void setNom(String nom);
-
-    String getDescription();
-=======
-
-public class Ingredient {
+public abstract class Ingredient {
     private String nom;
-    private String description;
     private TypeIngredient typeIngredient;
+    private IngredientEtat etatIngredient;
+    private double quantite;
+
+    public Ingredient(String nom, TypeIngredient typeIngredient, IngredientEtat etatIngredient, double quantite) {
+        this.nom = nom;
+        this.typeIngredient = typeIngredient;
+        this.etatIngredient = etatIngredient;
+        this.quantite = quantite;
+    }
 
     public String getNom() {
         return nom;
     }
->>>>>>> Stashed changes
 
-    void setDescription(String description);
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-    TypeIngredient getType();
+    public TypeIngredient getTypeIngredient() {
+        return typeIngredient;
+    }
 
-    void setType(TypeIngredient type);
+    public void setTypeIngredient(TypeIngredient typeIngredient) {
+        this.typeIngredient = typeIngredient;
+    }
 
-    IngredientEtat getEtat();
+    public IngredientEtat getEtatIngredient() {
+        return etatIngredient;
+    }
 
-    void setEtat(IngredientEtat etat);
+    public void setEtatIngredient(IngredientEtat etatIngredient) {
+        this.etatIngredient = etatIngredient;
+    }
+
+    public double getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(double quantite) {
+        this.quantite = quantite;
+    }
 }

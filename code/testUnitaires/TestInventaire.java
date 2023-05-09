@@ -1,6 +1,7 @@
 package testUnitaires;
 
 import ingredients.*;
+import ingredients.etat.EtatIngredient;
 import inventaire.Inventaire;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,8 +21,6 @@ class TestInventaire {
     @BeforeEach
     public void setUp() throws Exception {
         inventaire = Inventaire.getInventaire();
-        epice = new Epice();
-        ingredient.put(epice, 2);
     }
 
     @Test
@@ -31,7 +30,7 @@ class TestInventaire {
 
     @Test
     void addIngredient() {
-        inventaire.addIngredient(epice, 2);
-        assertEquals(ingredient, inventaire.getIngredients());
+        inventaire.addIngredient("Poivre",TypeIngredient.EPICE,EtatIngredient.SOLIDE, 2);
+        assertEquals(ingredient, inventaire.getInventaire());
     }
 }

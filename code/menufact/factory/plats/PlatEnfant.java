@@ -7,11 +7,8 @@ import menufact.Builder.Recette;
 public class PlatEnfant extends PlatAuMenu {
     private double proportion;
 
-    public PlatEnfant() {
-    }
-
-    public PlatEnfant(int code, String description, double prix, double proportion, Recette recette) {
-        super(code, description, prix * proportion, recette);
+    public PlatEnfant(Integer code, String description, double prix, double proportion) {
+        super(code, description, prix);
         this.proportion = proportion;
     }
 
@@ -21,8 +18,7 @@ public class PlatEnfant extends PlatAuMenu {
 
     @Override
     public String toString() {
-        return "PlatEnfant{" +
-                "proportion=" + proportion +
-                "} " + super.toString();
+        return super.toString() + ", Proportion: " + proportion;
     }
 }
+

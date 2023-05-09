@@ -2,30 +2,17 @@ package menufact.factory.plats;
 
 import menufact.factory.exceptions.PlatException;
 import menufact.Builder.Recette;
+import menufact.singleton.*;
 
-public class PlatAuMenu implements Plat {
+public class PlatAuMenu {
     private int code;
     private String description;
     private double prix;
-    private Recette recette;
 
-    public PlatAuMenu(int code, String description, double prix, Recette recette) {
+    public PlatAuMenu(Integer code, String description, double prix) {
         this.code = code;
         this.description = description;
         this.prix = prix;
-        this.recette = recette;
-    }
-
-    public PlatAuMenu() {
-    }
-
-    @Override
-    public String toString() {
-        return "menufact.plats.PlatAuMenu{" +
-                "code=" + code +
-                ", description='" + description + '\'' +
-                ", prix=" + prix +
-                "}\n";
     }
 
     public int getCode() {
@@ -52,11 +39,18 @@ public class PlatAuMenu implements Plat {
         this.prix = prix;
     }
 
-    public Recette getRecette() {
-        return recette;
+    public Recette getRecette(int code) {
+        Menu menu = Menu.getMenu("description");
+        try {
+            return menu.getRecettePourPlat(menu.getPlatAuMenu(code));
+        } catch (menufact.exceptions.MenuException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public void setRecette(Recette recette) {
-        this.recette = recette;
+    @Override
+    public String toString() {
+        return "Code: " + code + ", Description: " + description + ", Prix: " + prix + ", Recette: " + getRecette(code);
     }
 }

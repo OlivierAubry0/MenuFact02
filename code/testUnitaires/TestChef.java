@@ -1,56 +1,46 @@
 package testUnitaires;
 
-import menufact.Chef;
-import menufact.Client;
-import menufact.factory.plats.PlatAuMenu;
-import menufact.factory.plats.PlatChoisi;
-import menufact.factory.exceptions.PlatException;
-import menufact.observer.Facture;
-import menufact.observer.exceptions.FactureException;
-import menufact.state.*;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class TestChef {
-    PlatChoisi plat;
-    Facture facture;
+import menufact.Chef;
+import menufact.factory.plats.PlatAuMenu;
+import menufact.factory.plats.PlatChoisi;
+import menufact.factory.exceptions.PlatException;
+import menufact.state.EnCours;
+import menufact.state.Servie;
+
+public class TestChef {
+
+    Chef chef;
+    PlatAuMenu platAuMenu;
+    PlatChoisi platChoisi;
+
     @BeforeEach
-    public void setup(){
-        facture = new Facture("Nouvelle Facture");
-        facture.associerClient(new Client(1,"batman", "1111"));
-        facture.associerChef(Chef.getInstance("joker"));
-        plat = new PlatChoisi(new PlatAuMenu(),2);
-
-
-    }
-    @Test
-    void fairePlat() throws FactureException, PlatException{
-        Chef joker;
-        joker = Chef.getInstance("joker");
-        joker.cuisiner(plat);
-        Assertions.assertTrue(plat.getState() instanceof Servie);
-    }
-    @Test
-
-    void terminerCommande() throws FactureException, PlatException {
-        Chef joker;
-        joker = Chef.getInstance("joker");
-        joker.cuisiner(plat);
-        facture.ajoutePlat(plat);
-        facture.genererFacture();
-        Assertions.assertTrue(plat.getState() instanceof Terminee);
+    public void setUp() {
+        chef = Chef.getInstance("Chef Test");
+        platAuMenu = new PlatAuMenu(1, "Poulet", 12.99);
+        platChoisi = new PlatChoisi(platAuMenu, 2);
     }
 
     @Test
+    public void testCuisiner() throws PlatException {
+        chef.cuisiner(platChoisi);
+        assertEquals(new EnCours(platChoisi), platChoisi.getState());
+    }
 
-    void commandeEnCours() throws FactureException, PlatException{
-        Chef joker;
-        joker = Chef.getInstance("joker");
-        joker.cuisiner(plat);
-        facture.ajoutePlat(plat);
-        Assertions.assertTrue(plat.getState() instanceof EnCours);
+    @Test
+    public void testServir() throws PlatException {
+        chef.cuisiner(platChoisi);
+        chef.servir(platChoisi);
+        assertEquals(new Servie(platChoisi), platChoisi.getState());
+    }
+
+    @Test
+    public void testGetInstance() {
+        assertTrue(chef == Chef.getInstance("Chef Test"));
     }
 }
-
-

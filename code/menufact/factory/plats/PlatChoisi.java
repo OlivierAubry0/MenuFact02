@@ -1,10 +1,7 @@
 package menufact.factory.plats;
 
-import menufact.factory.exceptions.PlatException;
-import menufact.factory.plats.Plat;
-import menufact.factory.plats.PlatAuMenu;
-import menufact.state.Commande;
 import menufact.state.StatePreparation;
+import menufact.Builder.*;
 
 public class PlatChoisi extends PlatAuMenu{
     private PlatAuMenu plat;
@@ -12,20 +9,20 @@ public class PlatChoisi extends PlatAuMenu{
     private StatePreparation state;
 
     public PlatChoisi(PlatAuMenu plat, int quantite) {
-        super(plat.getCode(), plat.getDescription(), plat.getPrix(), plat.getRecette());
+        super(plat.getCode(), plat.getDescription(), plat.getPrix());
         this.quantite = quantite;
+        this.state = state;
     }
 
+    public PlatAuMenu getPlat(){
+        return this.plat;
+    }
     public int getQuantite() {
-        return quantite;
+        return this.quantite;
     }
 
     public void setQuantite(int quantite) {
         this.quantite = quantite;
-    }
-
-    public PlatAuMenu getPlat() {
-        return plat;
     }
 
     public StatePreparation getState() {
@@ -40,8 +37,11 @@ public class PlatChoisi extends PlatAuMenu{
     public String toString() {
         return "menufact.plats.PlatChoisi{" +
                 "quantite=" + quantite +
-                ", plat=" + plat +
+                ", code=" + getCode() +
+                ", description=" + getDescription() +
+                ", prix=" + getPrix() +
+                ", recette=" + getRecette(getCode()) +
+                ", state=" + getState() +
                 '}';
     }
 }
-
