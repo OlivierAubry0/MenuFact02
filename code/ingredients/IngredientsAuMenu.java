@@ -45,4 +45,12 @@ public class IngredientsAuMenu {
     }
 }
 
+/**
+ * Creates a new IngredientAuMenu object with the given name, type of ingredient, state of the ingredient, and quantity of the ingredient.
+ * @param nom The name of the ingredient.
+ * @param typeIngredient The type of ingredient.
+ * @param etatIngredient The state of the ingredient.
+ * @param quantite The quantity of the ingredient.
+ */
+
 

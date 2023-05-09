@@ -1,0 +1,15 @@
+ingredients
+ingredients.etat
+ingredients.exceptions
+inventaire
+menufact
+menufact.Builder
+menufact.exceptions
+menufact.factory.exceptions
+menufact.factory.plats
+menufact.observer
+menufact.observer.exceptions
+menufact.observer.MVC
+menufact.singleton
+menufact.state
+testUnitaires

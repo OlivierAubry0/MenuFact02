@@ -1,5 +1,8 @@
 package inventaire;
 
+/**
+ La classe inventaire sert à garder le compte des ingrédients disponibles dans le restaurant
+ */
 import ingredients.Ingredient;
 import ingredients.TypeIngredient;
 import ingredients.IngredientsAuMenu;
@@ -24,6 +27,17 @@ public class Inventaire {
             inventaire = new Inventaire();
         return inventaire;
     }
+
+
+
+    /**
+     * Adds an ingredient to the inventory with the given name, type, state, and quantity.
+     * If the ingredient already exists in the inventory, its quantity is increased by the given amount.
+     * @param nom The name of the ingredient.
+     * @param type The type of the ingredient.
+     * @param etat The state of the ingredient.
+     * @param quantite The quantity of the ingredient to add.
+     */
 
     public void addIngredient(String nom, TypeIngredient type, EtatIngredient etat, double quantite) {
         Ingredient ingredient = ingredientsAuMenu.getIngredient(nom,quantite, type, etat);
