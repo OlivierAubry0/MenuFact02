@@ -30,6 +30,10 @@ public class Inventaire {
         ingredients.put(ingredient, ingredients.getOrDefault(ingredient, 0.0) + quantite);
     }
 
+    public void addIngredient2(Ingredient ingredient, double quantite){
+        ingredients.put(ingredient, quantite);
+    }
+
     public void removeIngredient(String nom, TypeIngredient type, EtatIngredient etat, double quantite) {
         Ingredient ingredient = ingredientsAuMenu.getIngredient(nom, quantite, type, etat);
         Double currentQuantity = ingredients.get(ingredient);
@@ -50,4 +54,5 @@ public class Inventaire {
         }
         return true;
     }
+    public Map<Ingredient, Double> getIngredients() { return ingredients; }
 }

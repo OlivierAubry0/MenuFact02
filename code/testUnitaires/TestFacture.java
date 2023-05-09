@@ -14,9 +14,11 @@ import menufact.Builder.Recette;
 import inventaire.Inventaire;
 import menufact.factory.plats.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import menufact.singleton.Menu;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,9 +30,12 @@ class TestFacture {
     Chef chef;
     private Menu menu;
 
+    private Map<Ingredient,Double> ingredient = new HashMap<>();
+
     private Inventaire inventaire;
     PlatFactory platFactory;
     private Recette poutine;
+    private Ingredient patate;
     private Map<Ingredient, Integer> IngredientPoutine;
 
     @BeforeEach
@@ -42,13 +47,10 @@ class TestFacture {
         facture.associerClient(client);
         facture.associerChef(chef);
 
-        Ingredient Patate = new Legume("Patate", EtatIngredient.SOLIDE, 1);
-        Ingredient Fromage = new Laitier("Fromage", EtatIngredient.SOLIDE, 1);
-        Ingredient Sauce = new Epice("Sauce", EtatIngredient.LIQUIDE, 1);
+
+        patate = new Legume("Patate", EtatIngredient.SOLIDE, 1);
         RecetteBuilder poutineBuilder = new RecetteBuilder();
-        poutineBuilder.addIngredient(Patate,3)
-                .addIngredient(Fromage, 20)
-                .addIngredient(Sauce, 1);
+        poutineBuilder.addIngredient(patate,3);
         poutine =  poutineBuilder.build();
         facture = new Facture("Nouvelle Facture");
         facture.associerClient(new Client(1,"batman", "1111"));
@@ -66,11 +68,12 @@ class TestFacture {
             menu = Menu.getMenu("resto");
             menu.ajoute(plat1);
             Menu.associerRecetteAuPlat(plat1,poutine);
-
-            inventaire.addIngredient("Patate", TypeIngredient.LEGUME, EtatIngredient.SOLIDE, 1);
-            inventaire.addIngredient("Fromage", TypeIngredient.LAITIER, EtatIngredient.SOLIDE, 1);
-            inventaire.addIngredient("Sauce", TypeIngredient.VIANDE, EtatIngredient.LIQUIDE, 1);
             inventaire = Inventaire.getInventaire();
+
+            inventaire.addIngredient2(patate,3);
+
+
+
 
             if (inventaire.hasSufficientIngredients(plat1.getRecette(1))) {
                 facture.ajoutePlat(plat1);

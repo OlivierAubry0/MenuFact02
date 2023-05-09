@@ -107,7 +107,7 @@ public class Facture extends Observable {
         if (etat instanceof FactureEtatOuverte)
             this.platchoisi.add(p);
         p.setState(new EnCours(p));
-        notifyObservers("Un nouveau plat a été ajouté à la facture: " + p.getPlat().getDescription());
+        notifyObservers("Un nouveau plat a été ajouté:" + p.getDescription());
     }
 
     @Override

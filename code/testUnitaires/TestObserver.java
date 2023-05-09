@@ -57,7 +57,7 @@ class TestObserver {
             facture.ajoutePlat(platChoisi);
             assertTrue(facture.getPlats().contains(platChoisi));
         } catch (FactureException | PlatException e) {
-            fail("Exception non attendue lors de l'ajout du plat à la facture : " + e.getMessage());
+            fail("Exception non attendue lors de l'ajout du plat à la facture :   " + e.getMessage());
         }
     }
 }

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TestInventaire {
 
     private Inventaire inventaire;
-    private Map<Ingredient,Integer> ingredient = new HashMap<>();
+    private Map<Ingredient,Double> ingredient = new HashMap<>();
     private Ingredient epice;
     private void assertArrayEquals(Inventaire inventaire, Inventaire inventaire1) {
     }
@@ -22,7 +22,7 @@ class TestInventaire {
     public void setUp() throws Exception {
         inventaire = Inventaire.getInventaire();
         epice = new Epice("Poivre", EtatIngredient.SOLIDE, 1);
-        ingredient.put(epice,2);
+        ingredient.put(epice,2.0);
     }
 
     @Test
@@ -32,7 +32,7 @@ class TestInventaire {
 
     @Test
     void addIngredient() {
-        inventaire.addIngredient("Poivre",TypeIngredient.EPICE, EtatIngredient.SOLIDE, 2);
-        assertEquals(ingredient, inventaire.getInventaire());
+        inventaire.addIngredient2(epice,2);
+        assertEquals(ingredient, inventaire.getIngredients());
     }
 }
