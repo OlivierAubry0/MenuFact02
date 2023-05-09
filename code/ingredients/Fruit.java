@@ -1,9 +1,9 @@
 package ingredients;
 
-import ingredients.etat.IngredientEtat;
+import ingredients.etat.EtatIngredient;
 
 public class Fruit extends Ingredient {
-    public Fruit(String nom, IngredientEtat etat, double quantite) {
+    public Fruit(String nom, EtatIngredient etat, double quantite) {
         super(nom,TypeIngredient.FRUIT, etat, quantite);
     }
 }

@@ -28,9 +28,9 @@ class RecetteTest {
 
     @Test
     void testGetIngredients() {
-        Ingredient Tomate = new Legume("Tomate", EtatIngredient.SOLIDE.getEtat(), 150);
-        Ingredient Fromage = new Laitier("Fromage", EtatIngredient.SOLIDE.getEtat(), 25);
-        Ingredient Sauce = new Epice("Sauce", EtatIngredient.LIQUIDE.getEtat(), 5);
+        Ingredient Tomate = new Legume("Tomate", EtatIngredient.SOLIDE, 150);
+        Ingredient Fromage = new Laitier("Fromage", EtatIngredient.SOLIDE, 25);
+        Ingredient Sauce = new Epice("Sauce", EtatIngredient.LIQUIDE, 5);
         RecetteBuilder pizzaBuilder = new RecetteBuilder();
         pizzaBuilder.addIngredient(Tomate, 3)
                     .addIngredient(Fromage, 20)

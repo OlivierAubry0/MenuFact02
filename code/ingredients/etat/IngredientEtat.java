@@ -1,13 +1,17 @@
 package ingredients.etat;
 
 public abstract class IngredientEtat {
-    private String unite;
+    private EtatIngredient etat;
+    private String unit;
 
-    public IngredientEtat(String unite) {
-        this.unite = unite;
+
+
+    public IngredientEtat(EtatIngredient etat) {
+        this.etat = etat;
     }
 
-    public String getUnite() {
-        return unite;
+    public EtatIngredient getEtat() {
+        return etat;
     }
 }
+

@@ -18,24 +18,23 @@ public class IngredientsAuMenu {
             return ingredients.get(nom);
         }
 
-        IngredientEtat Etat = etat.getEtat();
 
         Ingredient nouvelIngredient;
         switch (type) {
             case FRUIT:
-                nouvelIngredient = new Fruit(nom, Etat, quantite);
+                nouvelIngredient = new Fruit(nom, etat, quantite);
                 break;
             case LEGUME:
-                nouvelIngredient = new Legume(nom, Etat, quantite);
+                nouvelIngredient = new Legume(nom, etat, quantite);
                 break;
             case VIANDE:
-                nouvelIngredient = new Viande(nom, Etat, quantite);
+                nouvelIngredient = new Viande(nom, etat, quantite);
                 break;
             case LAITIER:
-                nouvelIngredient = new Laitier(nom, Etat, quantite);
+                nouvelIngredient = new Laitier(nom, etat, quantite);
                 break;
             case EPICE:
-                nouvelIngredient = new Epice(nom, Etat, quantite);
+                nouvelIngredient = new Epice(nom, etat, quantite);
                 break;
             default:
                 throw new IllegalArgumentException("Type d'ingrédient non reconnu : " + type);

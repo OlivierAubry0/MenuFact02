@@ -5,6 +5,7 @@ import ingredients.Ingredient;
 import ingredients.Laitier;
 import ingredients.Legume;
 import ingredients.etat.EtatIngredient;
+import ingredients.etat.IngredientEtat;
 import menufact.Builder.Recette;
 import menufact.Builder.RecetteBuilder;
 import menufact.Chef;
@@ -29,9 +30,9 @@ class ObserverTest {
         chef = Chef.getInstance("Chef Gordon");
         facture = new Facture("Facture Test");
         facture.registerObserver(chef);
-        Ingredient Patate = new Legume("Patate", EtatIngredient.SOLIDE.getEtat(), 150);
-        Ingredient Fromage = new Laitier("Fromage", EtatIngredient.SOLIDE.getEtat(), 25);
-        Ingredient Sauce = new Epice("Sauce", EtatIngredient.LIQUIDE.getEtat(), 5);
+        Ingredient Patate = new Legume("Patate", EtatIngredient.SOLIDE, 150);
+        Ingredient Fromage = new Laitier("Fromage", EtatIngredient.SOLIDE, 25);
+        Ingredient Sauce = new Epice("Sauce", EtatIngredient.LIQUIDE, 5);
         RecetteBuilder poutineBuilder = new RecetteBuilder();
         poutineBuilder.addIngredient(Patate,3)
                 .addIngredient(Fromage, 20)

@@ -30,7 +30,7 @@ class TestInventaire {
 
     @Test
     void addIngredient() {
-        inventaire.addIngredient("Poivre",TypeIngredient.EPICE,EtatIngredient.SOLIDE, 2);
+        inventaire.addIngredient("Poivre",TypeIngredient.EPICE, EtatIngredient.SOLIDE, 2);
         assertEquals(ingredient, inventaire.getInventaire());
     }
 }

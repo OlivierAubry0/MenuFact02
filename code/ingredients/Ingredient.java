@@ -1,13 +1,14 @@
 package ingredients;
 
-import ingredients.etat.IngredientEtat;
+import ingredients.etat.EtatIngredient;
+
 public abstract class Ingredient {
     private String nom;
     private TypeIngredient typeIngredient;
-    private IngredientEtat etatIngredient;
+    private EtatIngredient etatIngredient;
     private double quantite;
 
-    public Ingredient(String nom, TypeIngredient typeIngredient, IngredientEtat etatIngredient, double quantite) {
+    public Ingredient(String nom, TypeIngredient typeIngredient, EtatIngredient etatIngredient, double quantite) {
         this.nom = nom;
         this.typeIngredient = typeIngredient;
         this.etatIngredient = etatIngredient;
@@ -30,11 +31,11 @@ public abstract class Ingredient {
         this.typeIngredient = typeIngredient;
     }
 
-    public IngredientEtat getEtatIngredient() {
+    public EtatIngredient getEtatIngredient() {
         return etatIngredient;
     }
 
-    public void setEtatIngredient(IngredientEtat etatIngredient) {
+    public void setEtatIngredient(EtatIngredient etatIngredient) {
         this.etatIngredient = etatIngredient;
     }
 
