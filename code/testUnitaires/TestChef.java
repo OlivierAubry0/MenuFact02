@@ -29,14 +29,14 @@ public class TestChef {
     @Test
     public void testCuisiner() throws PlatException {
         chef.cuisiner(platChoisi);
-        assertEquals(new EnCours(platChoisi), platChoisi.getState());
+        assertTrue(platChoisi.getState() instanceof EnCours);
     }
 
     @Test
     public void testServir() throws PlatException {
         chef.cuisiner(platChoisi);
         chef.servir(platChoisi);
-        assertEquals(new Servie(platChoisi), platChoisi.getState());
+        assertTrue(platChoisi.getState() instanceof  Servie);
     }
 
     @Test

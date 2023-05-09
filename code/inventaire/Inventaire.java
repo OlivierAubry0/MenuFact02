@@ -15,6 +15,7 @@ public class Inventaire {
     private IngredientsAuMenu ingredientsAuMenu = new IngredientsAuMenu();
 
     private Inventaire() {
+
     }
 
     public static Inventaire getInventaire() {
