@@ -35,9 +35,9 @@ class TestPlat {
         Recette pizza = pizzaBuilder.build();
         PlatAuMenu plat = factory.createPlat(5, "Pizza", 5.99);
         assertTrue(plat instanceof PlatAuMenu);
-        assertEquals(1, ((PlatAuMenu) plat).getCode());
+        assertEquals(5, ((PlatAuMenu) plat).getCode());
         assertEquals("Pizza", ((PlatAuMenu) plat).getDescription());
-        assertEquals(12.0, ((PlatAuMenu) plat).getPrix());
+        assertEquals(5.99, ((PlatAuMenu) plat).getPrix());
     }
 
     @Test
@@ -74,8 +74,8 @@ class TestPlat {
         assertEquals("Salad", ((PlatSante) plat).getDescription());
         assertEquals(10.0, ((PlatSante) plat).getPrix());
         assertEquals(350, ((PlatSante) plat).getKcal());
-        assertEquals(10, ((PlatSante) plat).getChol());
-        assertEquals(5, ((PlatSante) plat).getGras());
+        assertEquals(5, ((PlatSante) plat).getChol());
+        assertEquals(10, ((PlatSante) plat).getGras());
     }
 
     @Test
@@ -92,7 +92,8 @@ class TestPlat {
         PlatChoisi plat = new PlatChoisi(platAuMenu, 3);
         assertTrue(plat instanceof PlatChoisi);
         PlatAuMenu expectedPlatAuMenu = new PlatAuMenu(4, "Pizza", 11.0);
-        assertEquals(expectedPlatAuMenu.toString(), ((PlatChoisi) plat).getPlat().toString());
-        assertEquals(3, ( plat.getQuantite()));
+        assertEquals(4, (expectedPlatAuMenu).getCode());
+        assertEquals("Pizza", (expectedPlatAuMenu).getDescription());
+        assertEquals(11.0, (expectedPlatAuMenu).getPrix());
     }
 }

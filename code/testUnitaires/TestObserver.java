@@ -15,6 +15,7 @@ import menufact.observer.Facture;
 import menufact.observer.exceptions.*;
 import menufact.factory.exceptions.*;
 
+import menufact.singleton.Menu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestObserver {
     Facture facture;
+
+    Menu menu;
     Chef chef;
     PlatChoisi platChoisi;
 
@@ -39,6 +42,8 @@ class TestObserver {
                 .addIngredient(Sauce, 1);
         Recette poutine =  poutineBuilder.build();
         platChoisi = new PlatChoisi(new PlatAuMenu(1,"Poutine",9.99),2);
+        Menu.associerRecetteAuPlat(platChoisi, poutine);
+
     }
 
 
@@ -48,6 +53,7 @@ class TestObserver {
             chef = Chef.getInstance("Chef Gordon");
             facture = new Facture("Facture Test");
             facture.registerObserver(chef);
+            facture.associerChef(chef);
             facture.ajoutePlat(platChoisi);
             assertTrue(facture.getPlats().contains(platChoisi));
         } catch (FactureException | PlatException e) {

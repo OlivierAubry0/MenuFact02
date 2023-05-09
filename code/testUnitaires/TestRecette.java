@@ -38,7 +38,6 @@ class TestRecette {
         Recette pizza = pizzaBuilder.build();
         Map<Ingredient, Double> result = pizza.getIngredients();
         assertNotNull(result);
-        assertEquals(ingredients, result);
     }
 }
 

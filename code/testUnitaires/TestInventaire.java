@@ -15,12 +15,17 @@ class TestInventaire {
 
     private Inventaire inventaire;
     private Map<Ingredient,Integer> ingredient = new HashMap<>();
-    private IngredientsAuMenu epice;
+    private Ingredient epice;
     private void assertArrayEquals(Inventaire inventaire, Inventaire inventaire1) {
     }
     @BeforeEach
     public void setUp() throws Exception {
         inventaire = Inventaire.getInventaire();
+        epice.setEtatIngredient(EtatIngredient.SOLIDE);
+        epice.setNom("Poivre");
+        epice.setTypeIngredient(TypeIngredient.EPICE);
+        epice.setQuantite(2);
+        ingredient.put(epice,1);
     }
 
     @Test

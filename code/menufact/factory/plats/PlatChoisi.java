@@ -15,7 +15,7 @@ public class PlatChoisi extends PlatAuMenu{
     }
 
     public PlatAuMenu getPlat(){
-        return this.plat;
+        return plat;
     }
     public int getQuantite() {
         return this.quantite;

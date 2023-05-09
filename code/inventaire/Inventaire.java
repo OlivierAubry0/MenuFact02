@@ -14,7 +14,8 @@ public class Inventaire {
     private Map<Ingredient, Double> ingredients = new HashMap<>();
     private IngredientsAuMenu ingredientsAuMenu = new IngredientsAuMenu();
 
-    private Inventaire() {
+    public Inventaire() {
+
 
     }
 
