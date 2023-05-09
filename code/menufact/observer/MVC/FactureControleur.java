@@ -1,10 +1,13 @@
 package menufact.observer.MVC;
 
+import menufact.Client;
 import menufact.observer.*;
 
 public class FactureControleur {
     private Facture facture;
     private FactureVue vue;
+
+    private static Client client;
 
     public FactureControleur() {
         facture = new Facture("Facture");
@@ -15,6 +18,7 @@ public class FactureControleur {
 
     public void genererFacture() {
         String factureGeneree = facture.genererFacture();
+        facture.associerClient(client);
         vue.updateTextArea(factureGeneree);
         facture.notifyObservers(factureGeneree);
     }

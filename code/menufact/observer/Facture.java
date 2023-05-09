@@ -172,11 +172,11 @@ public class Facture extends Observable {
     public String genererFacture() {
         StringBuilder factureGenere = new StringBuilder();
         int i = 1;
-
+        factureGenere.append("Cuisine par: " + chef.getNom() + "\n" );
         factureGenere.append("Facture generee.\n" +
                 "Date:" + date + "\n" +
                 "Description: " + description + "\n" +
-                "Client:" + client.getNom() + "\n" +
+                "Client: " + client.getNom() + "\n" +
                 "Les plats commandes:\n");
 
         factureGenere.append("Seq   Plat         Prix   Quantite\n");

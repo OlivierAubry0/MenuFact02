@@ -95,12 +95,17 @@ public class TestMenuFact02 {
 
         Client c1 = new Client(1,"Mr Client","1234567890");
 
-       /* f1.associerClient(c1);
-        FactureControleur ct1 = new FactureControleur();
-        FactureVue u1 = new FactureVue(ct1);
-        u1.show();
-        u1.actualiser("Facture générée");
-        u1.updateTextArea("Facture générée");*/
+        Chef chef = Chef.getInstance("bob");
+
+        f1.associerChef(chef);
+
+        PlatChoisi pc = new PlatChoisi(p1, 1);
+        f1.ajoutePlat(pc);
+
+
+       f1.associerClient(c1);
+
+
         
 
         t.test1_AffichePlatsAuMenu(trace, p1,p2,p3,p4,p5);
@@ -169,6 +174,10 @@ public class TestMenuFact02 {
         System.out.println("FIN DE TOUS LES TESTS...");
 
         System.out.println(f1.genererFacture());
+        FactureControleur ct1 = new FactureControleur();
+        FactureVue u1 = new FactureVue(ct1);
+        u1.updateTextArea(f1.genererFacture());
+        u1.show();
     }
 
     private void test1_AffichePlatsAuMenu(boolean trace, PlatAuMenu p1, PlatAuMenu p2,
@@ -320,6 +329,8 @@ public class TestMenuFact02 {
         System.out.println(f1);
 
 
+
+
     }
 
 
@@ -363,7 +374,4 @@ public class TestMenuFact02 {
         System.out.println(f1);
     }
 
-    private void test10_UI(){
-
-    }
 }

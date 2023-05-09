@@ -29,11 +29,6 @@ public class FactureVue implements Observer {
         textArea.setEditable(false);
         panel.add(textArea, BorderLayout.CENTER);
 
-        JButton genereFactureBtn = new JButton("Générer la facture");
-        genereFactureBtn.addActionListener(e -> controleur.genererFacture());
-
-        panel.add(genereFactureBtn, BorderLayout.SOUTH);
-
         frame.getContentPane().add(panel);
     }
 
