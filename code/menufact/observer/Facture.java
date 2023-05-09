@@ -45,7 +45,7 @@ public class Facture extends Observable {
     {
         double soustotal=0;
         for (PlatChoisi p : platchoisi)
-            soustotal += p.getQuantite() * p.getPlat().getPrix();
+            soustotal += p.getQuantite() * p.getPrix();
         return soustotal;
     }
     public double total(){
@@ -134,7 +134,7 @@ public class Facture extends Observable {
 
         factureGenere.append("Seq   Plat         Prix   Quantite\n");
         for (PlatChoisi plat : platchoisi) {
-            factureGenere.append(i + "     " + plat.getPlat().getDescription() + "  " + plat.getPlat().getPrix() + "      " + plat.getQuantite() + "\n");
+            factureGenere.append(i + "     " + plat.getDescription() + "  " + plat.getPrix() + "      " + plat.getQuantite() + "\n");
             i++;
             plat.setState(new Terminee(plat));
         }

@@ -1,6 +1,12 @@
 package menufact;
 
+import ingredients.*;
+import ingredients.etat.EtatIngredient;
+import menufact.Builder.Recette;
+import menufact.Builder.RecetteBuilder;
 import menufact.factory.exceptions.PlatException;
+import menufact.observer.MVC.FactureControleur;
+import menufact.observer.MVC.FactureVue;
 import menufact.observer.exceptions.FactureException;
 import menufact.exceptions.MenuException;
 import menufact.observer.Facture;
@@ -8,6 +14,8 @@ import menufact.factory.plats.PlatAuMenu;
 import menufact.factory.plats.PlatChoisi;
 import menufact.factory.plats.PlatSante;
 import menufact.singleton.Menu;
+
+import java.util.Map;
 
 
 public class TestMenuFact02 {
@@ -24,6 +32,8 @@ public class TestMenuFact02 {
         PlatAuMenu p5 = new PlatAuMenu(4,"PlatAuMenu4",50);
 
 
+
+
         PlatSante ps1 = new PlatSante(10,"PlatSante0",10,11,11,11);
         PlatSante ps2 = new PlatSante(11,"PlatSante1",20,11,11,11);
         PlatSante ps3 = new PlatSante(12,"PlatSante2",30,11,11,11);
@@ -31,13 +41,64 @@ public class TestMenuFact02 {
         PlatSante ps5 = new PlatSante(14,"PlatSante4",50,11,11,11);
 
 
+        Ingredient Steak = new Viande("Steal", EtatIngredient.SOLIDE, 1);
+        RecetteBuilder steakBuilder = new RecetteBuilder();
+        steakBuilder.addIngredient(Steak, 1);
+
+        Recette steak = steakBuilder.build();
+
+
+        Menu.associerRecetteAuPlat(p1,steak);
+        Menu.associerRecetteAuPlat(p2,steak);
+        Menu.associerRecetteAuPlat(p3,steak);
+        Menu.associerRecetteAuPlat(p4,steak);
+        Menu.associerRecetteAuPlat(p5,steak);
+
+        Menu.associerRecetteAuPlat(ps1,steak);
+        Menu.associerRecetteAuPlat(ps2,steak);
+        Menu.associerRecetteAuPlat(ps3,steak);
+        Menu.associerRecetteAuPlat(ps4,steak);
+        Menu.associerRecetteAuPlat(ps5,steak);
+
+
+
         menufact.singleton.Menu m1 = Menu.getMenu("menufact.Menu 1");
         menufact.singleton.Menu m2 = Menu.getMenu("menufact.Menu 2");
+
+        m1.ajoute(p1);
+        m1.ajoute(p2);
+        m1.ajoute(p3);
+        m1.ajoute(p4);
+        m1.ajoute(p5);
+
+        m1.ajoute(ps1);
+        m1.ajoute(ps2);
+        m1.ajoute(ps3);
+        m1.ajoute(ps4);
+        m1.ajoute(ps5);
+
+        m2.ajoute(p1);
+        m2.ajoute(p2);
+        m2.ajoute(p3);
+        m2.ajoute(p4);
+        m2.ajoute(p5);
+
+        m2.ajoute(ps1);
+        m2.ajoute(ps2);
+        m2.ajoute(ps3);
+        m2.ajoute(ps4);
+        m2.ajoute(ps5);
+
+
 
         Facture f1 = new Facture("Ma facture");
 
         Client c1 = new Client(1,"Mr Client","1234567890");
 
+
+        FactureControleur ct1 = new FactureControleur();
+        FactureVue u1 = new FactureVue(ct1);
+        
 
         t.test1_AffichePlatsAuMenu(trace, p1,p2,p3,p4,p5);
         t. test2_AffichePlatsSante(trace, ps1,ps2,ps3,ps4,ps5);
@@ -297,5 +358,9 @@ public class TestMenuFact02 {
         f1.payer();
         System.out.println("Apres avoir paye la facture");
         System.out.println(f1);
+    }
+
+    private void test10_UI(){
+
     }
 }
