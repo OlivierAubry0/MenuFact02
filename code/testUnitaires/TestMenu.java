@@ -2,18 +2,18 @@
 package testUnitaires;
 
 
+import ingredients.Laitier;
+import ingredients.etat.EtatIngredient;
+import menufact.Builder.RecetteBuilder;
 import menufact.singleton.Menu;
 import menufact.exceptions.MenuException;
 import menufact.factory.plats.*;
-import menufact.factory.exceptions.PlatException;
 import menufact.Builder.Recette;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-
-import org.junit.jupiter.api.Test;
 
 //Client
 
@@ -29,7 +29,7 @@ class TestMenu {
         platAuMenu = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Recette recette = new Recette(); // Ajoutez les ingrédients nécessaires à la recette ici.
-            PlatAuMenu plat = factoryPlatAuMenu.createPlat(3, "oui oui", 15.45, recette);
+            PlatAuMenu plat = factoryPlatAuMenu.createPlat(3, "oui oui", 15.45);
             platAuMenu.add(plat);
             menu.ajoute(plat);
         }
@@ -38,15 +38,22 @@ class TestMenu {
 
 
     @Test
-    public void ajoute() {
-        try {
-            Recette recette = new Recette(); // Ajoutez les ingrédients nécessaires à la recette ici.
-            PlatAuMenu plat = factoryPlatAuMenu.createPlat(3, "oui oui", 15.45, recette);
-            menu.ajoute(plat);
-            Assertions.assertEquals(plat, menu.getPlatAuMenu(plat.getCode()));
-        } catch (MenuException e) {
-            e.printStackTrace();
-        }
+    public void ajoute(){
+        Recette recette = new Recette(); // Ajoutez les ingrédients nécessaires à la recette ici.
+        Laitier fromage = new Laitier("cheddar", EtatIngredient.SOLIDE,2);
+
+        RecetteBuilder recetteBuilder = new RecetteBuilder();
+        recetteBuilder.addIngredient(fromage,2);
+        recette = recetteBuilder.build();
+
+        PlatAuMenu plat = factoryPlatAuMenu.createPlat(3, "oui oui", 15.45);
+        menu.ajoute(plat);
+        Menu.associerRecetteAuPlat(plat,recette);
+        Assertions.assertEquals(plat.getCode(), 3);
+        Assertions.assertEquals(plat.getDescription(), "oui oui");
+        Assertions.assertEquals(plat.getPrix(), 15.45);
+        Assertions.assertEquals(plat.getRecette(3), recette);
+
     }
 
 

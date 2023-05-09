@@ -4,7 +4,7 @@ import menufact.Builder.Recette;
 import menufact.factory.exceptions.PlatException;
 
 public class PlatFactory {
-    public PlatAuMenu createPlat(Integer code, String description, double prix, Recette recette) {
+    public PlatAuMenu createPlat(Integer code, String description, double prix) {
         return new PlatAuMenu(code, description, prix);
     }
 

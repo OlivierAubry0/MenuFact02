@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ObserverTest {
+class TestObserver {
     Facture facture;
     Chef chef;
     PlatChoisi platChoisi;
@@ -45,6 +45,9 @@ class ObserverTest {
     @Test
     void testNotificationChef() {
         try {
+            chef = Chef.getInstance("Chef Gordon");
+            facture = new Facture("Facture Test");
+            facture.registerObserver(chef);
             facture.ajoutePlat(platChoisi);
             assertTrue(facture.getPlats().contains(platChoisi));
         } catch (FactureException | PlatException e) {

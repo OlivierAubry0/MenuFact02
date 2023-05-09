@@ -39,7 +39,6 @@ public class Chef implements Observer {
     public PlatChoisi cuisiner(PlatChoisi plat) {
         verifierIngredient(plat);
         preparer(plat);
-        servir(plat);
 
         return plat;
     }

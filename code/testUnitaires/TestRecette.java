@@ -16,7 +16,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class RecetteTest {
+class TestRecette {
     private Recette recette;
     private Map<Ingredient, Integer> ingredients;
 

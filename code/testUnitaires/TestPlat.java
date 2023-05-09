@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PlatsTest {
+class TestPlat {
 
     private PlatFactory factory;
 
@@ -33,7 +33,7 @@ class PlatsTest {
                 .addIngredient(Fromage, 20)
                 .addIngredient(Sauce, 1);
         Recette pizza = pizzaBuilder.build();
-        PlatAuMenu plat = factory.createPlat(5, "Pizza", 5.99, pizza);
+        PlatAuMenu plat = factory.createPlat(5, "Pizza", 5.99);
         assertTrue(plat instanceof PlatAuMenu);
         assertEquals(1, ((PlatAuMenu) plat).getCode());
         assertEquals("Pizza", ((PlatAuMenu) plat).getDescription());
@@ -88,11 +88,11 @@ class PlatsTest {
                 .addIngredient(Fromage, 20)
                 .addIngredient(Sauce, 1);
         Recette pizza = pizzaBuilder.build();
-        PlatAuMenu platAuMenu = factory.createPlat(4, "Pizza", 11.0, pizza);
+        PlatAuMenu platAuMenu = factory.createPlat(4, "Pizza", 11.0);
         PlatChoisi plat = new PlatChoisi(platAuMenu, 3);
         assertTrue(plat instanceof PlatChoisi);
         PlatAuMenu expectedPlatAuMenu = new PlatAuMenu(4, "Pizza", 11.0);
         assertEquals(expectedPlatAuMenu.toString(), ((PlatChoisi) plat).getPlat().toString());
-        assertEquals(1, ((PlatChoisi) plat).getQuantite());
+        assertEquals(3, ( plat.getQuantite()));
     }
 }
