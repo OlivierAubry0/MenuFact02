@@ -51,6 +51,6 @@ public class PlatAuMenu {
 
     @Override
     public String toString() {
-        return "Code: " + code + ", Description: " + description + ", Prix: " + prix + ", Recette: " + getRecette(code);
+        return "Code: " + code + ", Description: " + description + ", Prix: " + prix ;
     }
 }

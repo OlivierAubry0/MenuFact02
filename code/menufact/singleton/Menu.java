@@ -53,12 +53,14 @@ public class Menu {
     }
 
     public void positionSuivante() throws MenuException {
-        if (courant + 1 <= plats.size())
+        if (courant + 1 >= plats.size())
+            throw new MenuException("On depasse le nombre maximal de plats");
             courant++;
     }
 
     public void positionPrecedente() throws MenuException {
-        if (courant - 1 > 0)
+        if (courant - 1 < 0)
+            throw new MenuException("On depasse le nombre minimal de plats");
             courant--;
     }
 

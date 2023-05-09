@@ -95,9 +95,12 @@ public class TestMenuFact02 {
 
         Client c1 = new Client(1,"Mr Client","1234567890");
 
-
+       /* f1.associerClient(c1);
         FactureControleur ct1 = new FactureControleur();
         FactureVue u1 = new FactureVue(ct1);
+        u1.show();
+        u1.actualiser("Facture générée");
+        u1.updateTextArea("Facture générée");*/
         
 
         t.test1_AffichePlatsAuMenu(trace, p1,p2,p3,p4,p5);
